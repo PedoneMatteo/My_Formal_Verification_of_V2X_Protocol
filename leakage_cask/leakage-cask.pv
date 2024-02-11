@@ -100,17 +100,17 @@ query sendervid:bitstring, vpseudocert:certype, receivervid:bitstring, m:bitstri
 	event(ValidMessageReceived(receivervid, m)) ==> event(ValidMessageSent(sendervid, vpseudocert, m)) || event(AttackerGetsEnrollmentCertificate(sendervid, attpk)).*)
 (* Q1.6 - Sanity check: not event AlreadyRevoked - result: FALSE 
 query vid:bitstring; event(AlreadyRevoked(vid)).*)
-(* Q1.7 - Sanity check: attacker can ask revocation of another vehicle - result: FALSE *)
+(* Q1.7 - Sanity check: attacker can ask revocation of another vehicle - result: FALSE 
 query torevokecert:certype, vcert:certype, vid:bitstring; event(ValidRevocationReportReceived(torevokecert, vcert)) ==> event(RevocationAsked(vid, vcert, torevokecert)).
 query torevokecert:certype, vcert:certype, vid:bitstring, attpk:pkey; 
-	event(ValidRevocationReportReceived(torevokecert, vcert)) ==> event(RevocationAsked(vid, vcert, torevokecert)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).
+	event(ValidRevocationReportReceived(torevokecert, vcert)) ==> event(RevocationAsked(vid, vcert, torevokecert)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).*)
 
-(* Qx.x - Temporal constraint: revoked cannot get key and revoke event - result: cannot be proved *) (*
-query vid:bitstring, t1:time, t2:time; event(RevokedCannotGetGroupKey(vid))@t2 && event(RevokedVid(vid))@t1 ==> t1 < t2.
+(* Qx.x - Temporal constraint: revoked cannot get key and revoke event - result: cannot be proved 
+query vid:bitstring, t1:time, t2:time; event(RevokedCannotGetGroupKey(vid))@t2 && event(RevokedVid(vid))@t1 ==> t1 < t2.*) 
 
 (* Qx.2 - Temporal constraint: cannot receive a valid message from a vehicle that has been removed *)
 query sendervid:bitstring, vpseudocert:certype, receivervid:bitstring, m:bitstring, t1:time, t2:time, t3:time; 
-	event(ValidMessageSent(sendervid, vpseudocert, m))@t1 && event(ValidMessageReceived(receivervid, m))@t2 && event(RevokedVid(sendervid))@t3 ==> t1 < t2 && t2 < t3.
+	event(ValidMessageSent(sendervid, vpseudocert, m))@t1 && event(ValidMessageReceived(receivervid, m))@t2 && event(RevokedVid(sendervid))@t3 ==> t1 < t2 && t2 < t3.(*
 (* ATTACK FOUND attacker sends -> (m, sign(m, oldsk), pseudocert(pk(oldsk), sign using new gsk) *)
 
 (* Qx.3 - FALSE *)

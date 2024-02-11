@@ -1,0 +1,758 @@
+digraph {
+graph [ordering = out]
+edge [arrowhead = none, penwidth = 1.6, fontsize = 30]
+node [shape = point, width = 0, height = 0, fontsize = 30]
+Trace<br/>
+[label = <A trace has been found.<br/>
+>, shape = plaintext]
+P0__0 [label = "Honest Process", shape = plaintext]
+P__0 [label = "Attacker", shape = plaintext]
+Trace -> P0__0 [label = "", style = invisible, weight = 100]{rank = same; P0__0 P__0}
+P0__0 -> P0__1 [label = <>, weight = 100]
+P0__1 -> P0__2 [label = <>, weight = 100]
+P0__2 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{1}</FONT><FONT COLOR="blue">new </FONT>gmsk_4</TD></TR><TR><TD><FONT COLOR="darkgreen">{2}</FONT><FONT COLOR="blue">new </FONT>cask_3</TD></TR></TABLE>>]
+P0__2 -> P0__3 [label = <>, weight = 100]
+P0__3 -> P0__4 [label = <>, weight = 100]
+P__0 -> P__1 [label = <>, weight = 100]
+{rank = same; P__1 P0__4}
+P0__4 -> P0__5 [label = <>, weight = 100]
+P__1 -> P__2 [label = <>, weight = 100]
+{rank = same; P__2 P0__5}
+P0__5 -> P__2 [label = <~M = pk(cask_3)>, arrowhead = normal]
+P0__5 -> P0__6 [label = <>, weight = 100]
+P__2 -> P__3 [label = <>, weight = 100]
+{rank = same; P__3 P0__6}
+/*RPar */
+P0__6 -> P0_3__6 [label = <>]
+P0__6 -> P0_2__6 [label = <>]
+P0__6 -> P0_1__6 [label = <>]
+P0__6 -> P0_0__6 [label = <>]
+P0__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0__6 P0_1__6 P0_2__6 P0_3__6}
+P0_0__6 [label = "!", shape = ellipse]
+{rank = same; P0_0_1__6 P0_0_0__6}
+P0_0_1__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_0__6 -> P0_0_1__6 [label = <>]
+P0_0_0__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_0__6 -> P0_0_0__6 [label = <>]
+P0_0_0__6 -> P0_0_0__7 [label = <>, weight = 100]
+P0_0_0__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">CARevoke</FONT></TD></TR></TABLE>>]
+P0_0_0__7 -> P0_0_0__8 [label = <>, weight = 100]
+P0_0_1__6 -> P0_0_1__7 [label = <>, weight = 100]
+P0_0_1__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">CARevoke</FONT></TD></TR></TABLE>>]
+P0_0_1__7 -> P0_0_1__8 [label = <>, weight = 100]
+P0_1__6 [label = "!", shape = ellipse]
+{rank = same; P0_1_4__6 P0_1_3__6 P0_1_2__6 P0_1_1__6 P0_1_0__6}
+P0_1_4__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_1__6 -> P0_1_4__6 [label = <>]
+P0_1_3__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_1__6 -> P0_1_3__6 [label = <>]
+P0_1_2__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_1__6 -> P0_1_2__6 [label = <>]
+P0_1_1__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_1__6 -> P0_1_1__6 [label = <>]
+P0_1_0__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_1__6 -> P0_1_0__6 [label = <>]
+P0_1_0__6 -> P0_1_0__7 [label = <>, weight = 100]
+P0_1_0__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">CARegister</FONT></TD></TR></TABLE>>]
+P0_1_0__7 -> P0_1_0__8 [label = <>, weight = 100]
+P0_1_1__6 -> P0_1_1__7 [label = <>, weight = 100]
+P0_1_1__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">CARegister</FONT></TD></TR></TABLE>>]
+P0_1_1__7 -> P0_1_1__8 [label = <>, weight = 100]
+P0_1_2__6 -> P0_1_2__7 [label = <>, weight = 100]
+P0_1_2__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">CARegister</FONT></TD></TR></TABLE>>]
+P0_1_2__7 -> P0_1_2__8 [label = <>, weight = 100]
+P0_1_3__6 -> P0_1_3__7 [label = <>, weight = 100]
+P0_1_3__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">CARegister</FONT></TD></TR></TABLE>>]
+P0_1_3__7 -> P0_1_3__8 [label = <>, weight = 100]
+P0_1_4__6 -> P0_1_4__7 [label = <>, weight = 100]
+P0_1_4__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">CARegister</FONT></TD></TR></TABLE>>]
+P0_1_4__7 -> P0_1_4__8 [label = <>, weight = 100]
+P0_2__6 [label = "!", shape = ellipse]
+{rank = same; P0_2_3__6 P0_2_2__6 P0_2_1__6 P0_2_0__6}
+P0_2_3__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_2__6 -> P0_2_3__6 [label = <>]
+P0_2_2__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_2__6 -> P0_2_2__6 [label = <>]
+P0_2_1__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_2__6 -> P0_2_1__6 [label = <>]
+P0_2_0__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_2__6 -> P0_2_0__6 [label = <>]
+P0_2_0__6 -> P0_2_0__7 [label = <>, weight = 100]
+P0_2_0__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{91}</FONT><FONT COLOR="blue">new </FONT>attvid_5</TD></TR><TR><TD><FONT COLOR="darkgreen">{92}</FONT><FONT COLOR="blue">new </FONT>attsk_5</TD></TR><TR><TD><FONT COLOR="darkgreen">{95}</FONT><FONT COLOR="blue">event</FONT> AttackerGetsEnrollmentCertificate(attvid_5,<br/>
+pk(attsk_5))</TD></TR></TABLE>>]
+P0_2_0__7 -> P0_2_0__8 [label = <>, weight = 100]
+P0_2_0__8 -> P0_2_0__9 [label = <>, weight = 100]
+P0_1_4__8 -> P0_1_4__9 [label = <>, weight = 100]
+P0_1_3__8 -> P0_1_3__9 [label = <>, weight = 100]
+P0_1_2__8 -> P0_1_2__9 [label = <>, weight = 100]
+P0_1_1__8 -> P0_1_1__9 [label = <>, weight = 100]
+P0_1_0__8 -> P0_1_0__9 [label = <>, weight = 100]
+P0_0_1__8 -> P0_0_1__9 [label = <>, weight = 100]
+P0_0_0__8 -> P0_0_0__9 [label = <>, weight = 100]
+P__3 -> P__4 [label = <>, weight = 100]
+{rank = same; P__4 P0_0_0__9 P0_0_1__9 P0_1_0__9 P0_1_1__9 P0_1_2__9 P0_1_3__9 P0_1_4__9 P0_2_0__9}
+P0_2_0__9 -> P0_2_0__10 [label = <>, weight = 100]
+P__4 -> P__5 [label = <>, weight = 100]
+{rank = same; P__5 P0_2_0__10}
+P0_2_0__10 -> P__5 [label = <(~M_1,~M_2,~M_3) = (attvid_5,attsk_5,cert(attvid_5,<br/>
+pk(attsk_5),cask_3))>, arrowhead = normal]
+P0_2_0__10 -> P0_2_0__11 [label = <>, weight = 100]
+P0_1_4__9 -> P0_1_4__10 [label = <>, weight = 100]
+P0_1_3__9 -> P0_1_3__10 [label = <>, weight = 100]
+P0_1_2__9 -> P0_1_2__10 [label = <>, weight = 100]
+P0_1_1__9 -> P0_1_1__10 [label = <>, weight = 100]
+P0_1_0__9 -> P0_1_0__10 [label = <>, weight = 100]
+P0_0_1__9 -> P0_0_1__10 [label = <>, weight = 100]
+P0_0_0__9 -> P0_0_0__10 [label = <>, weight = 100]
+P__5 -> P__6 [label = <>, weight = 100]
+{rank = same; P__6 P0_0_0__10 P0_0_1__10 P0_1_0__10 P0_1_1__10 P0_1_2__10 P0_1_3__10 P0_1_4__10 P0_2_0__11}
+P0_2_0__12 [label = "", width = 0.3, height = 0.3]
+P0_2_0__11 -> P0_2_0__12 [label = <>, weight = 100]
+P0_2_1__6 -> P0_2_1__7 [label = <>, weight = 100]
+P0_2_1__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{91}</FONT><FONT COLOR="blue">new </FONT>attvid_6</TD></TR><TR><TD><FONT COLOR="darkgreen">{92}</FONT><FONT COLOR="blue">new </FONT>attsk_6</TD></TR><TR><TD><FONT COLOR="darkgreen">{95}</FONT><FONT COLOR="blue">event</FONT> AttackerGetsEnrollmentCertificate(attvid_6,<br/>
+pk(attsk_6))</TD></TR></TABLE>>]
+P0_2_1__7 -> P0_2_1__8 [label = <>, weight = 100]
+P0_2_1__8 -> P0_2_1__9 [label = <>, weight = 100]
+P0_2_0__13 [label = "", style = invisible]
+P0_2_0__12 -> P0_2_0__13 [label = <>, weight = 100, style = invisible]
+P0_1_4__10 -> P0_1_4__11 [label = <>, weight = 100]
+P0_1_3__10 -> P0_1_3__11 [label = <>, weight = 100]
+P0_1_2__10 -> P0_1_2__11 [label = <>, weight = 100]
+P0_1_1__10 -> P0_1_1__11 [label = <>, weight = 100]
+P0_1_0__10 -> P0_1_0__11 [label = <>, weight = 100]
+P0_0_1__10 -> P0_0_1__11 [label = <>, weight = 100]
+P0_0_0__10 -> P0_0_0__11 [label = <>, weight = 100]
+P__6 -> P__7 [label = <>, weight = 100]
+{rank = same; P__7 P0_0_0__11 P0_0_1__11 P0_1_0__11 P0_1_1__11 P0_1_2__11 P0_1_3__11 P0_1_4__11 P0_2_0__13 P0_2_1__9}
+P0_2_1__9 -> P0_2_1__10 [label = <>, weight = 100]
+P__7 -> P__8 [label = <>, weight = 100]
+{rank = same; P__8 P0_2_1__10}
+P0_2_1__10 -> P__8 [label = <(~M_4,~M_5,~M_6) = (attvid_6,attsk_6,cert(attvid_6,<br/>
+pk(attsk_6),cask_3))>, arrowhead = normal]
+P0_2_1__10 -> P0_2_1__11 [label = <>, weight = 100]
+P0_2_0__14 [label = "", style = invisible]
+P0_2_0__13 -> P0_2_0__14 [label = <>, weight = 100, style = invisible]
+P0_1_4__11 -> P0_1_4__12 [label = <>, weight = 100]
+P0_1_3__11 -> P0_1_3__12 [label = <>, weight = 100]
+P0_1_2__11 -> P0_1_2__12 [label = <>, weight = 100]
+P0_1_1__11 -> P0_1_1__12 [label = <>, weight = 100]
+P0_1_0__11 -> P0_1_0__12 [label = <>, weight = 100]
+P0_0_1__11 -> P0_0_1__12 [label = <>, weight = 100]
+P0_0_0__11 -> P0_0_0__12 [label = <>, weight = 100]
+P__8 -> P__9 [label = <>, weight = 100]
+{rank = same; P__9 P0_0_0__12 P0_0_1__12 P0_1_0__12 P0_1_1__12 P0_1_2__12 P0_1_3__12 P0_1_4__12 P0_2_0__14 P0_2_1__11}
+P0_2_1__12 [label = "", width = 0.3, height = 0.3]
+P0_2_1__11 -> P0_2_1__12 [label = <>, weight = 100]
+P0_2_2__6 -> P0_2_2__7 [label = <>, weight = 100]
+P0_2_2__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{91}</FONT><FONT COLOR="blue">new </FONT>attvid_7</TD></TR><TR><TD><FONT COLOR="darkgreen">{92}</FONT><FONT COLOR="blue">new </FONT>attsk_7</TD></TR><TR><TD><FONT COLOR="darkgreen">{95}</FONT><FONT COLOR="blue">event</FONT> AttackerGetsEnrollmentCertificate(attvid_7,<br/>
+pk(attsk_7))</TD></TR></TABLE>>]
+P0_2_2__7 -> P0_2_2__8 [label = <>, weight = 100]
+P0_2_2__8 -> P0_2_2__9 [label = <>, weight = 100]
+P0_2_1__13 [label = "", style = invisible]
+P0_2_1__12 -> P0_2_1__13 [label = <>, weight = 100, style = invisible]
+P0_2_0__15 [label = "", style = invisible]
+P0_2_0__14 -> P0_2_0__15 [label = <>, weight = 100, style = invisible]
+P0_1_4__12 -> P0_1_4__13 [label = <>, weight = 100]
+P0_1_3__12 -> P0_1_3__13 [label = <>, weight = 100]
+P0_1_2__12 -> P0_1_2__13 [label = <>, weight = 100]
+P0_1_1__12 -> P0_1_1__13 [label = <>, weight = 100]
+P0_1_0__12 -> P0_1_0__13 [label = <>, weight = 100]
+P0_0_1__12 -> P0_0_1__13 [label = <>, weight = 100]
+P0_0_0__12 -> P0_0_0__13 [label = <>, weight = 100]
+P__9 -> P__10 [label = <>, weight = 100]
+{rank = same; P__10 P0_0_0__13 P0_0_1__13 P0_1_0__13 P0_1_1__13 P0_1_2__13 P0_1_3__13 P0_1_4__13 P0_2_0__15 P0_2_1__13 P0_2_2__9}
+P0_2_2__9 -> P0_2_2__10 [label = <>, weight = 100]
+P__10 -> P__11 [label = <>, weight = 100]
+{rank = same; P__11 P0_2_2__10}
+P0_2_2__10 -> P__11 [label = <(~M_7,~M_8,~M_9) = (attvid_7,attsk_7,cert(attvid_7,<br/>
+pk(attsk_7),cask_3))>, arrowhead = normal]
+P0_2_2__10 -> P0_2_2__11 [label = <>, weight = 100]
+P0_2_1__14 [label = "", style = invisible]
+P0_2_1__13 -> P0_2_1__14 [label = <>, weight = 100, style = invisible]
+P0_2_0__16 [label = "", style = invisible]
+P0_2_0__15 -> P0_2_0__16 [label = <>, weight = 100, style = invisible]
+P0_1_4__13 -> P0_1_4__14 [label = <>, weight = 100]
+P0_1_3__13 -> P0_1_3__14 [label = <>, weight = 100]
+P0_1_2__13 -> P0_1_2__14 [label = <>, weight = 100]
+P0_1_1__13 -> P0_1_1__14 [label = <>, weight = 100]
+P0_1_0__13 -> P0_1_0__14 [label = <>, weight = 100]
+P0_0_1__13 -> P0_0_1__14 [label = <>, weight = 100]
+P0_0_0__13 -> P0_0_0__14 [label = <>, weight = 100]
+P__11 -> P__12 [label = <>, weight = 100]
+{rank = same; P__12 P0_0_0__14 P0_0_1__14 P0_1_0__14 P0_1_1__14 P0_1_2__14 P0_1_3__14 P0_1_4__14 P0_2_0__16 P0_2_1__14 P0_2_2__11}
+P0_2_2__12 [label = "", width = 0.3, height = 0.3]
+P0_2_2__11 -> P0_2_2__12 [label = <>, weight = 100]
+P0_2_3__6 -> P0_2_3__7 [label = <>, weight = 100]
+P0_2_3__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{91}</FONT><FONT COLOR="blue">new </FONT>attvid_8</TD></TR><TR><TD><FONT COLOR="darkgreen">{92}</FONT><FONT COLOR="blue">new </FONT>attsk_8</TD></TR><TR><TD><FONT COLOR="darkgreen">{95}</FONT><FONT COLOR="blue">event</FONT> AttackerGetsEnrollmentCertificate(attvid_8,<br/>
+pk(attsk_8))</TD></TR></TABLE>>]
+P0_2_3__7 -> P0_2_3__8 [label = <>, weight = 100]
+P0_2_3__8 -> P0_2_3__9 [label = <>, weight = 100]
+P0_2_2__13 [label = "", style = invisible]
+P0_2_2__12 -> P0_2_2__13 [label = <>, weight = 100, style = invisible]
+P0_2_1__15 [label = "", style = invisible]
+P0_2_1__14 -> P0_2_1__15 [label = <>, weight = 100, style = invisible]
+P0_2_0__17 [label = "", style = invisible]
+P0_2_0__16 -> P0_2_0__17 [label = <>, weight = 100, style = invisible]
+P0_1_4__14 -> P0_1_4__15 [label = <>, weight = 100]
+P0_1_3__14 -> P0_1_3__15 [label = <>, weight = 100]
+P0_1_2__14 -> P0_1_2__15 [label = <>, weight = 100]
+P0_1_1__14 -> P0_1_1__15 [label = <>, weight = 100]
+P0_1_0__14 -> P0_1_0__15 [label = <>, weight = 100]
+P0_0_1__14 -> P0_0_1__15 [label = <>, weight = 100]
+P0_0_0__14 -> P0_0_0__15 [label = <>, weight = 100]
+P__12 -> P__13 [label = <>, weight = 100]
+{rank = same; P__13 P0_0_0__15 P0_0_1__15 P0_1_0__15 P0_1_1__15 P0_1_2__15 P0_1_3__15 P0_1_4__15 P0_2_0__17 P0_2_1__15 P0_2_2__13 P0_2_3__9}
+P0_2_3__9 -> P0_2_3__10 [label = <>, weight = 100]
+P__13 -> P__14 [label = <>, weight = 100]
+{rank = same; P__14 P0_2_3__10}
+P0_2_3__10 -> P__14 [label = <(~M_10,~M_11,~M_12) = (attvid_8,attsk_8,cert(attvid_8,<br/>
+pk(attsk_8),cask_3))>, arrowhead = normal]
+P0_2_3__10 -> P0_2_3__11 [label = <>, weight = 100]
+P0_2_2__14 [label = "", style = invisible]
+P0_2_2__13 -> P0_2_2__14 [label = <>, weight = 100, style = invisible]
+P0_2_1__16 [label = "", style = invisible]
+P0_2_1__15 -> P0_2_1__16 [label = <>, weight = 100, style = invisible]
+P0_2_0__18 [label = "", style = invisible]
+P0_2_0__17 -> P0_2_0__18 [label = <>, weight = 100, style = invisible]
+P0_1_4__15 -> P0_1_4__16 [label = <>, weight = 100]
+P0_1_3__15 -> P0_1_3__16 [label = <>, weight = 100]
+P0_1_2__15 -> P0_1_2__16 [label = <>, weight = 100]
+P0_1_1__15 -> P0_1_1__16 [label = <>, weight = 100]
+P0_1_0__15 -> P0_1_0__16 [label = <>, weight = 100]
+P0_0_1__15 -> P0_0_1__16 [label = <>, weight = 100]
+P0_0_0__15 -> P0_0_0__16 [label = <>, weight = 100]
+P__14 -> P__15 [label = <>, weight = 100]
+{rank = same; P__15 P0_0_0__16 P0_0_1__16 P0_1_0__16 P0_1_1__16 P0_1_2__16 P0_1_3__16 P0_1_4__16 P0_2_0__18 P0_2_1__16 P0_2_2__14 P0_2_3__11}
+P0_2_3__12 [label = "", width = 0.3, height = 0.3]
+P0_2_3__11 -> P0_2_3__12 [label = <>, weight = 100]
+P0_3__6 -> P0_3__7 [label = <>, weight = 100]
+P0_3__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{5}</FONT><FONT COLOR="blue">new </FONT>vid_7</TD></TR><TR><TD><FONT COLOR="darkgreen">{6}</FONT><FONT COLOR="blue">new </FONT>vsk_3</TD></TR></TABLE>>]
+P0_3__7 -> P0_3__8 [label = <>, weight = 100]
+/*RPar */
+P0_3__8 -> P0_3_1__8 [label = <>]
+P0_3__8 -> P0_3_0__8 [label = <>]
+P0_3__8 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_3_0__8 P0_3_1__8}
+P0_3_1__8 -> P0_3_1__9 [label = <>, weight = 100]
+P0_3_1__9 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">VehicleRegistration</FONT></TD></TR><TR><TD><FONT COLOR="darkgreen">{14}</FONT><FONT COLOR="blue">event</FONT> ValidGroupKeyRequestSent(vid_7)</TD></TR></TABLE>>]
+P0_3_1__9 -> P0_3_1__10 [label = <>, weight = 100]
+P0_3_1__10 -> P0_3_1__11 [label = <>, weight = 100]
+P0_3_0__8 -> P0_3_0__9 [label = <>, weight = 100]
+P0_2_3__13 [label = "", style = invisible]
+P0_2_3__12 -> P0_2_3__13 [label = <>, weight = 100, style = invisible]
+P0_2_2__15 [label = "", style = invisible]
+P0_2_2__14 -> P0_2_2__15 [label = <>, weight = 100, style = invisible]
+P0_2_1__17 [label = "", style = invisible]
+P0_2_1__16 -> P0_2_1__17 [label = <>, weight = 100, style = invisible]
+P0_2_0__19 [label = "", style = invisible]
+P0_2_0__18 -> P0_2_0__19 [label = <>, weight = 100, style = invisible]
+P0_1_4__16 -> P0_1_4__17 [label = <>, weight = 100]
+P0_1_3__16 -> P0_1_3__17 [label = <>, weight = 100]
+P0_1_2__16 -> P0_1_2__17 [label = <>, weight = 100]
+P0_1_1__16 -> P0_1_1__17 [label = <>, weight = 100]
+P0_1_0__16 -> P0_1_0__17 [label = <>, weight = 100]
+P0_0_1__16 -> P0_0_1__17 [label = <>, weight = 100]
+P0_0_0__16 -> P0_0_0__17 [label = <>, weight = 100]
+P__15 -> P__16 [label = <>, weight = 100]
+{rank = same; P__16 P0_0_0__17 P0_0_1__17 P0_1_0__17 P0_1_1__17 P0_1_2__17 P0_1_3__17 P0_1_4__17 P0_2_0__19 P0_2_1__17 P0_2_2__15 P0_2_3__13 P0_3_0__9 P0_3_1__11}
+P0_3_1__11 -> P0_3_1__12 [label = <>, weight = 100]
+P__16 -> P__17 [label = <>, weight = 100]
+{rank = same; P__17 P0_3_1__12}
+P0_3_1__12 -> P__17 [label = <~M_13 = aenc((groupkey_request,sign(groupkey_request,<br/>
+vsk_3),cert(vid_7,pk(vsk_3),cask_3)),pk(cask_3))>, arrowhead = normal]
+P0_3_1__12 -> P0_3_1__13 [label = <>, weight = 100]
+P0_3_0__9 -> P0_3_0__10 [label = <>, weight = 100]
+P0_2_3__14 [label = "", style = invisible]
+P0_2_3__13 -> P0_2_3__14 [label = <>, weight = 100, style = invisible]
+P0_2_2__16 [label = "", style = invisible]
+P0_2_2__15 -> P0_2_2__16 [label = <>, weight = 100, style = invisible]
+P0_2_1__18 [label = "", style = invisible]
+P0_2_1__17 -> P0_2_1__18 [label = <>, weight = 100, style = invisible]
+P0_2_0__20 [label = "", style = invisible]
+P0_2_0__19 -> P0_2_0__20 [label = <>, weight = 100, style = invisible]
+P0_1_4__17 -> P0_1_4__18 [label = <>, weight = 100]
+P0_1_3__17 -> P0_1_3__18 [label = <>, weight = 100]
+P0_1_2__17 -> P0_1_2__18 [label = <>, weight = 100]
+P0_1_1__17 -> P0_1_1__18 [label = <>, weight = 100]
+P0_1_0__17 -> P0_1_0__18 [label = <>, weight = 100]
+P0_0_1__17 -> P0_0_1__18 [label = <>, weight = 100]
+P0_0_0__17 -> P0_0_0__18 [label = <>, weight = 100]
+P__17 -> P__18 [label = <>, weight = 100]
+{rank = same; P__18 P0_0_0__18 P0_0_1__18 P0_1_0__18 P0_1_1__18 P0_1_2__18 P0_1_3__18 P0_1_4__18 P0_2_0__20 P0_2_1__18 P0_2_2__16 P0_2_3__14 P0_3_0__10 P0_3_1__13}
+P0_1_4__18 -> P0_1_4__19 [label = <>, weight = 100]
+P0_1_3__18 -> P0_1_3__19 [label = <>, weight = 100]
+P0_1_2__18 -> P0_1_2__19 [label = <>, weight = 100]
+P0_1_1__18 -> P0_1_1__19 [label = <>, weight = 100]
+P0_1_0__18 -> P0_1_0__19 [label = <>, weight = 100]
+P0_0_1__18 -> P0_0_1__19 [label = <>, weight = 100]
+P0_0_0__18 -> P0_0_0__19 [label = <>, weight = 100]
+P__18 -> P__19 [label = <>, weight = 100]
+{rank = same; P__19 P0_0_0__19 P0_0_1__19 P0_1_0__19 P0_1_1__19 P0_1_2__19 P0_1_3__19 P0_1_4__19}
+P0_1_4__19 -> P0_1_4__20 [label = <>, weight = 100]
+P__19 -> P__20 [label = <>, weight = 100]
+{rank = same; P__20 P0_1_4__20}
+P0_1_4__20 -> P__20 [label = <aenc((groupkey_request,a_4,~M_3),~M) = aenc((groupkey_request,<br/>
+a_4,cert(attvid_5,pk(attsk_5),cask_3)),pk(cask_3))>, dir = back, arrowhead = normal]
+P0_1_4__20 -> P0_1_4__21 [label = <>, weight = 100]
+P0_1_3__19 -> P0_1_3__20 [label = <>, weight = 100]
+P0_1_2__19 -> P0_1_2__20 [label = <>, weight = 100]
+P0_1_1__19 -> P0_1_1__20 [label = <>, weight = 100]
+P0_1_0__19 -> P0_1_0__20 [label = <>, weight = 100]
+P0_0_1__19 -> P0_0_1__20 [label = <>, weight = 100]
+P0_0_0__19 -> P0_0_0__20 [label = <>, weight = 100]
+P__20 -> P__21 [label = <>, weight = 100]
+{rank = same; P__21 P0_0_0__20 P0_0_1__20 P0_1_0__20 P0_1_1__20 P0_1_2__20 P0_1_3__20 P0_1_4__21}
+P0_1_3__20 -> P0_1_3__21 [label = <>, weight = 100]
+P0_1_2__20 -> P0_1_2__21 [label = <>, weight = 100]
+P0_1_1__20 -> P0_1_1__21 [label = <>, weight = 100]
+P0_1_0__20 -> P0_1_0__21 [label = <>, weight = 100]
+P0_0_1__20 -> P0_0_1__21 [label = <>, weight = 100]
+P0_0_0__20 -> P0_0_0__21 [label = <>, weight = 100]
+P__21 -> P__22 [label = <>, weight = 100]
+{rank = same; P__22 P0_0_0__21 P0_0_1__21 P0_1_0__21 P0_1_1__21 P0_1_2__21 P0_1_3__21}
+P0_1_3__21 -> P0_1_3__22 [label = <>, weight = 100]
+P__22 -> P__23 [label = <>, weight = 100]
+{rank = same; P__23 P0_1_3__22}
+P0_1_3__22 -> P__23 [label = <~X_1>, dir = back, arrowhead = normal]
+P0_1_3__22 -> P0_1_3__23 [label = <>, weight = 100]
+P0_1_2__21 -> P0_1_2__22 [label = <>, weight = 100]
+P0_1_1__21 -> P0_1_1__22 [label = <>, weight = 100]
+P0_1_0__21 -> P0_1_0__22 [label = <>, weight = 100]
+P0_0_1__21 -> P0_0_1__22 [label = <>, weight = 100]
+P0_0_0__21 -> P0_0_0__22 [label = <>, weight = 100]
+P__23 -> P__24 [label = <>, weight = 100]
+{rank = same; P__24 P0_0_0__22 P0_0_1__22 P0_1_0__22 P0_1_1__22 P0_1_2__22 P0_1_3__23}
+P0_1_3__23 -> P0_1_3__24 [label = <>, weight = 100]
+P0_1_3__24 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{115}</FONT><FONT COLOR="blue">get</FONT> revokedcerts(=attvid_7): else branch taken<br/>
+</TD></TR><TR><TD><FONT COLOR="darkgreen">{108}</FONT><FONT COLOR="blue">event</FONT> ValidGroupKeyRequestReceived(cask_3,<br/>
+attvid_7)</TD></TR><TR><TD><FONT COLOR="darkgreen">{113}</FONT><FONT COLOR="blue">event</FONT> ValidGroupPrivateKeySent(attvid_7,gsk(<br/>
+attvid_7,gmsk_4),gpk(gmsk_4))</TD></TR></TABLE>>]
+P0_1_3__24 -> P0_1_3__25 [label = <>, weight = 100]
+P__24 -> P__25 [label = <>, weight = 100]
+{rank = same; P__25 P0_1_3__24}
+P0_1_3__25 -> P0_1_3__26 [label = <>, weight = 100]
+P0_1_2__22 -> P0_1_2__23 [label = <>, weight = 100]
+P0_1_1__22 -> P0_1_1__23 [label = <>, weight = 100]
+P0_1_0__22 -> P0_1_0__23 [label = <>, weight = 100]
+P0_0_1__22 -> P0_0_1__23 [label = <>, weight = 100]
+P0_0_0__22 -> P0_0_0__23 [label = <>, weight = 100]
+P__25 -> P__26 [label = <>, weight = 100]
+{rank = same; P__26 P0_0_0__23 P0_0_1__23 P0_1_0__23 P0_1_1__23 P0_1_2__23 P0_1_3__26}
+P0_1_3__26 -> P0_1_3__27 [label = <>, weight = 100]
+P__26 -> P__27 [label = <>, weight = 100]
+{rank = same; P__27 P0_1_3__27}
+P0_1_3__27 -> P__27 [label = <~M_14>, arrowhead = normal]
+P0_1_3__27 -> P0_1_3__28 [label = <>, weight = 100]
+P0_1_2__23 -> P0_1_2__24 [label = <>, weight = 100]
+P0_1_1__23 -> P0_1_1__24 [label = <>, weight = 100]
+P0_1_0__23 -> P0_1_0__24 [label = <>, weight = 100]
+P0_0_1__23 -> P0_0_1__24 [label = <>, weight = 100]
+P0_0_0__23 -> P0_0_0__24 [label = <>, weight = 100]
+P__27 -> P__28 [label = <>, weight = 100]
+{rank = same; P__28 P0_0_0__24 P0_0_1__24 P0_1_0__24 P0_1_1__24 P0_1_2__24 P0_1_3__28}
+P0_1_3__29 [label = "", width = 0.3, height = 0.3]
+P0_1_3__28 -> P0_1_3__29 [label = <>, weight = 100]
+P0_1_2__24 -> P0_1_2__25 [label = <>, weight = 100]
+P0_1_1__24 -> P0_1_1__25 [label = <>, weight = 100]
+P0_1_0__24 -> P0_1_0__25 [label = <>, weight = 100]
+P0_0_1__24 -> P0_0_1__25 [label = <>, weight = 100]
+P0_0_0__24 -> P0_0_0__25 [label = <>, weight = 100]
+P__28 -> P__29 [label = <>, weight = 100]
+{rank = same; P__29 P0_0_0__25 P0_0_1__25 P0_1_0__25 P0_1_1__25 P0_1_2__25}
+P0_1_2__25 -> P0_1_2__26 [label = <>, weight = 100]
+P__29 -> P__30 [label = <>, weight = 100]
+{rank = same; P__30 P0_1_2__26}
+P0_1_2__26 -> P__30 [label = <~X_2>, dir = back, arrowhead = normal]
+P0_1_2__26 -> P0_1_2__27 [label = <>, weight = 100]
+P0_1_1__25 -> P0_1_1__26 [label = <>, weight = 100]
+P0_1_0__25 -> P0_1_0__26 [label = <>, weight = 100]
+P0_0_1__25 -> P0_0_1__26 [label = <>, weight = 100]
+P0_0_0__25 -> P0_0_0__26 [label = <>, weight = 100]
+P__30 -> P__31 [label = <>, weight = 100]
+{rank = same; P__31 P0_0_0__26 P0_0_1__26 P0_1_0__26 P0_1_1__26 P0_1_2__27}
+P0_1_2__27 -> P0_1_2__28 [label = <>, weight = 100]
+P0_1_2__28 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{115}</FONT><FONT COLOR="blue">get</FONT> revokedcerts(=attvid_6): else branch taken<br/>
+</TD></TR><TR><TD><FONT COLOR="darkgreen">{108}</FONT><FONT COLOR="blue">event</FONT> ValidGroupKeyRequestReceived(cask_3,<br/>
+attvid_6)</TD></TR><TR><TD><FONT COLOR="darkgreen">{113}</FONT><FONT COLOR="blue">event</FONT> ValidGroupPrivateKeySent(attvid_6,gsk(<br/>
+attvid_6,gmsk_4),gpk(gmsk_4))</TD></TR></TABLE>>]
+P0_1_2__28 -> P0_1_2__29 [label = <>, weight = 100]
+P__31 -> P__32 [label = <>, weight = 100]
+{rank = same; P__32 P0_1_2__28}
+P0_1_2__29 -> P0_1_2__30 [label = <>, weight = 100]
+P0_1_1__26 -> P0_1_1__27 [label = <>, weight = 100]
+P0_1_0__26 -> P0_1_0__27 [label = <>, weight = 100]
+P0_0_1__26 -> P0_0_1__27 [label = <>, weight = 100]
+P0_0_0__26 -> P0_0_0__27 [label = <>, weight = 100]
+P__32 -> P__33 [label = <>, weight = 100]
+{rank = same; P__33 P0_0_0__27 P0_0_1__27 P0_1_0__27 P0_1_1__27 P0_1_2__30}
+P0_1_2__30 -> P0_1_2__31 [label = <>, weight = 100]
+P__33 -> P__34 [label = <>, weight = 100]
+{rank = same; P__34 P0_1_2__31}
+P0_1_2__31 -> P__34 [label = <~M_15>, arrowhead = normal]
+P0_1_2__31 -> P0_1_2__32 [label = <>, weight = 100]
+P0_1_1__27 -> P0_1_1__28 [label = <>, weight = 100]
+P0_1_0__27 -> P0_1_0__28 [label = <>, weight = 100]
+P0_0_1__27 -> P0_0_1__28 [label = <>, weight = 100]
+P0_0_0__27 -> P0_0_0__28 [label = <>, weight = 100]
+P__34 -> P__35 [label = <>, weight = 100]
+{rank = same; P__35 P0_0_0__28 P0_0_1__28 P0_1_0__28 P0_1_1__28 P0_1_2__32}
+P0_1_2__33 [label = "", width = 0.3, height = 0.3]
+P0_1_2__32 -> P0_1_2__33 [label = <>, weight = 100]
+P0_1_1__28 -> P0_1_1__29 [label = <>, weight = 100]
+P0_1_0__28 -> P0_1_0__29 [label = <>, weight = 100]
+P0_0_1__28 -> P0_0_1__29 [label = <>, weight = 100]
+P0_0_0__28 -> P0_0_0__29 [label = <>, weight = 100]
+P__35 -> P__36 [label = <>, weight = 100]
+{rank = same; P__36 P0_0_0__29 P0_0_1__29 P0_1_0__29 P0_1_1__29}
+P0_1_1__29 -> P0_1_1__30 [label = <>, weight = 100]
+P__36 -> P__37 [label = <>, weight = 100]
+{rank = same; P__37 P0_1_1__30}
+P0_1_1__30 -> P__37 [label = <~X_3>, dir = back, arrowhead = normal]
+P0_1_1__30 -> P0_1_1__31 [label = <>, weight = 100]
+P0_1_0__29 -> P0_1_0__30 [label = <>, weight = 100]
+P0_0_1__29 -> P0_0_1__30 [label = <>, weight = 100]
+P0_0_0__29 -> P0_0_0__30 [label = <>, weight = 100]
+P__37 -> P__38 [label = <>, weight = 100]
+{rank = same; P__38 P0_0_0__30 P0_0_1__30 P0_1_0__30 P0_1_1__31}
+P0_1_1__31 -> P0_1_1__32 [label = <>, weight = 100]
+P0_1_1__32 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{115}</FONT><FONT COLOR="blue">get</FONT> revokedcerts(=attvid_5): else branch taken<br/>
+</TD></TR><TR><TD><FONT COLOR="darkgreen">{108}</FONT><FONT COLOR="blue">event</FONT> ValidGroupKeyRequestReceived(cask_3,<br/>
+attvid_5)</TD></TR><TR><TD><FONT COLOR="darkgreen">{113}</FONT><FONT COLOR="blue">event</FONT> ValidGroupPrivateKeySent(attvid_5,gsk(<br/>
+attvid_5,gmsk_4),gpk(gmsk_4))</TD></TR></TABLE>>]
+P0_1_1__32 -> P0_1_1__33 [label = <>, weight = 100]
+P__38 -> P__39 [label = <>, weight = 100]
+{rank = same; P__39 P0_1_1__32}
+P0_1_1__33 -> P0_1_1__34 [label = <>, weight = 100]
+P0_1_0__30 -> P0_1_0__31 [label = <>, weight = 100]
+P0_0_1__30 -> P0_0_1__31 [label = <>, weight = 100]
+P0_0_0__30 -> P0_0_0__31 [label = <>, weight = 100]
+P__39 -> P__40 [label = <>, weight = 100]
+{rank = same; P__40 P0_0_0__31 P0_0_1__31 P0_1_0__31 P0_1_1__34}
+P0_1_1__34 -> P0_1_1__35 [label = <>, weight = 100]
+P__40 -> P__41 [label = <>, weight = 100]
+{rank = same; P__41 P0_1_1__35}
+P0_1_1__35 -> P__41 [label = <~M_16>, arrowhead = normal]
+P0_1_1__35 -> P0_1_1__36 [label = <>, weight = 100]
+P0_1_0__31 -> P0_1_0__32 [label = <>, weight = 100]
+P0_0_1__31 -> P0_0_1__32 [label = <>, weight = 100]
+P0_0_0__31 -> P0_0_0__32 [label = <>, weight = 100]
+P__41 -> P__42 [label = <>, weight = 100]
+{rank = same; P__42 P0_0_0__32 P0_0_1__32 P0_1_0__32 P0_1_1__36}
+P0_1_1__37 [label = "", width = 0.3, height = 0.3]
+P0_1_1__36 -> P0_1_1__37 [label = <>, weight = 100]
+P0_1_0__32 -> P0_1_0__33 [label = <>, weight = 100]
+P0_0_1__32 -> P0_0_1__33 [label = <>, weight = 100]
+P0_0_0__32 -> P0_0_0__33 [label = <>, weight = 100]
+P__42 -> P__43 [label = <>, weight = 100]
+{rank = same; P__43 P0_0_0__33 P0_0_1__33 P0_1_0__33}
+P0_1_0__33 -> P0_1_0__34 [label = <>, weight = 100]
+P__43 -> P__44 [label = <>, weight = 100]
+{rank = same; P__44 P0_1_0__34}
+P0_1_0__34 -> P__44 [label = <~M_13 = aenc((groupkey_request,sign(groupkey_request,<br/>
+vsk_3),cert(vid_7,pk(vsk_3),cask_3)),pk(cask_3))>, dir = back, arrowhead = normal]
+P0_1_0__34 -> P0_1_0__35 [label = <>, weight = 100]
+P0_0_1__33 -> P0_0_1__34 [label = <>, weight = 100]
+P0_0_0__33 -> P0_0_0__34 [label = <>, weight = 100]
+P__44 -> P__45 [label = <>, weight = 100]
+{rank = same; P__45 P0_0_0__34 P0_0_1__34 P0_1_0__35}
+P0_1_0__35 -> P0_1_0__36 [label = <>, weight = 100]
+P0_1_0__36 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{115}</FONT><FONT COLOR="blue">get</FONT> revokedcerts(=vid_7): else branch taken<br/>
+</TD></TR><TR><TD><FONT COLOR="darkgreen">{108}</FONT><FONT COLOR="blue">event</FONT> ValidGroupKeyRequestReceived(cask_3,<br/>
+vid_7)</TD></TR><TR><TD><FONT COLOR="darkgreen">{113}</FONT><FONT COLOR="blue">event</FONT> ValidGroupPrivateKeySent(vid_7,gsk(<br/>
+vid_7,gmsk_4),gpk(gmsk_4))</TD></TR></TABLE>>]
+P0_1_0__36 -> P0_1_0__37 [label = <>, weight = 100]
+P__45 -> P__46 [label = <>, weight = 100]
+{rank = same; P__46 P0_1_0__36}
+P0_1_0__37 -> P0_1_0__38 [label = <>, weight = 100]
+P0_0_1__34 -> P0_0_1__35 [label = <>, weight = 100]
+P0_0_0__34 -> P0_0_0__35 [label = <>, weight = 100]
+P__46 -> P__47 [label = <>, weight = 100]
+{rank = same; P__47 P0_0_0__35 P0_0_1__35 P0_1_0__38}
+P0_1_0__38 -> P0_1_0__39 [label = <>, weight = 100]
+P__47 -> P__48 [label = <>, weight = 100]
+{rank = same; P__48 P0_1_0__39}
+P0_1_0__39 -> P__48 [label = <~M_17>, arrowhead = normal]
+P0_1_0__39 -> P0_1_0__40 [label = <>, weight = 100]
+P0_0_1__35 -> P0_0_1__36 [label = <>, weight = 100]
+P0_0_0__35 -> P0_0_0__36 [label = <>, weight = 100]
+P__48 -> P__49 [label = <>, weight = 100]
+{rank = same; P__49 P0_0_0__36 P0_0_1__36 P0_1_0__40}
+P0_1_0__41 [label = "", width = 0.3, height = 0.3]
+P0_1_0__40 -> P0_1_0__41 [label = <>, weight = 100]
+P0_3_1__13 -> P0_3_1__14 [label = <>, weight = 100]
+P0_3_0__10 -> P0_3_0__11 [label = <>, weight = 100]
+P0_2_3__15 [label = "", style = invisible]
+P0_2_3__14 -> P0_2_3__15 [label = <>, weight = 100, style = invisible]
+P0_2_2__17 [label = "", style = invisible]
+P0_2_2__16 -> P0_2_2__17 [label = <>, weight = 100, style = invisible]
+P0_2_1__19 [label = "", style = invisible]
+P0_2_1__18 -> P0_2_1__19 [label = <>, weight = 100, style = invisible]
+P0_2_0__21 [label = "", style = invisible]
+P0_2_0__20 -> P0_2_0__21 [label = <>, weight = 100, style = invisible]
+P0_1_4__21 -> P0_1_4__22 [label = <>, weight = 100]
+P0_1_3__30 [label = "", style = invisible]
+P0_1_3__29 -> P0_1_3__30 [label = <>, weight = 100, style = invisible]
+P0_1_2__34 [label = "", style = invisible]
+P0_1_2__33 -> P0_1_2__34 [label = <>, weight = 100, style = invisible]
+P0_1_1__38 [label = "", style = invisible]
+P0_1_1__37 -> P0_1_1__38 [label = <>, weight = 100, style = invisible]
+P0_1_0__42 [label = "", style = invisible]
+P0_1_0__41 -> P0_1_0__42 [label = <>, weight = 100, style = invisible]
+P0_0_1__36 -> P0_0_1__37 [label = <>, weight = 100]
+P0_0_0__36 -> P0_0_0__37 [label = <>, weight = 100]
+P__49 -> P__50 [label = <>, weight = 100]
+{rank = same; P__50 P0_0_0__37 P0_0_1__37 P0_1_0__42 P0_1_1__38 P0_1_2__34 P0_1_3__30 P0_1_4__22 P0_2_0__21 P0_2_1__19 P0_2_2__17 P0_2_3__15 P0_3_0__11 P0_3_1__14}
+P0_3_1__14 -> P0_3_1__15 [label = <>, weight = 100]
+P__50 -> P__51 [label = <>, weight = 100]
+{rank = same; P__51 P0_3_1__15}
+P0_3_1__15 -> P__51 [label = <~M_17>, dir = back, arrowhead = normal]
+P0_3_1__15 -> P0_3_1__16 [label = <>, weight = 100]
+P0_3_0__11 -> P0_3_0__12 [label = <>, weight = 100]
+P0_2_3__16 [label = "", style = invisible]
+P0_2_3__15 -> P0_2_3__16 [label = <>, weight = 100, style = invisible]
+P0_2_2__18 [label = "", style = invisible]
+P0_2_2__17 -> P0_2_2__18 [label = <>, weight = 100, style = invisible]
+P0_2_1__20 [label = "", style = invisible]
+P0_2_1__19 -> P0_2_1__20 [label = <>, weight = 100, style = invisible]
+P0_2_0__22 [label = "", style = invisible]
+P0_2_0__21 -> P0_2_0__22 [label = <>, weight = 100, style = invisible]
+P0_1_4__22 -> P0_1_4__23 [label = <>, weight = 100]
+P0_1_3__31 [label = "", style = invisible]
+P0_1_3__30 -> P0_1_3__31 [label = <>, weight = 100, style = invisible]
+P0_1_2__35 [label = "", style = invisible]
+P0_1_2__34 -> P0_1_2__35 [label = <>, weight = 100, style = invisible]
+P0_1_1__39 [label = "", style = invisible]
+P0_1_1__38 -> P0_1_1__39 [label = <>, weight = 100, style = invisible]
+P0_1_0__43 [label = "", style = invisible]
+P0_1_0__42 -> P0_1_0__43 [label = <>, weight = 100, style = invisible]
+P0_0_1__37 -> P0_0_1__38 [label = <>, weight = 100]
+P0_0_0__37 -> P0_0_0__38 [label = <>, weight = 100]
+P__51 -> P__52 [label = <>, weight = 100]
+{rank = same; P__52 P0_0_0__38 P0_0_1__38 P0_1_0__43 P0_1_1__39 P0_1_2__35 P0_1_3__31 P0_1_4__23 P0_2_0__22 P0_2_1__20 P0_2_2__18 P0_2_3__16 P0_3_0__12 P0_3_1__16}
+P0_3_1__16 -> P0_3_1__17 [label = <>, weight = 100]
+P0_3_1__17 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{21}</FONT><FONT COLOR="blue">event</FONT> ValidGroupPrivateKeyReceived(vid_7,gsk(<br/>
+vid_7,gmsk_4),gpk(gmsk_4))</TD></TR></TABLE>>]
+P0_3_1__17 -> P0_3_1__18 [label = <>, weight = 100]
+/*RPar */
+P0_3_1__18 -> P0_3_1_2__18 [label = <>]
+P0_3_1__18 -> P0_3_1_1__18 [label = <>]
+P0_3_1__18 -> P0_3_1_0__18 [label = <>]
+P0_3_1__18 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_3_1_0__18 P0_3_1_1__18 P0_3_1_2__18}
+P0_3_1_0__18 [label = "!", shape = ellipse]
+P0_3_1_0_0__18 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_3_1_0__18 -> P0_3_1_0_0__18 [label = <>, weight = 100]
+P0_3_1_0_0__18 -> P0_3_1_0_0__19 [label = <>, weight = 100]
+P0_3_1_0_0__19 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">VehicleReport</FONT>(vid_7, vsk_3,<br/>
+cert(vid_7,pk(vsk_3),cask_3), pk(cask_3), gpk(<br/>
+gmsk_4))</TD></TR></TABLE>>]
+P0_3_1_0_0__19 -> P0_3_1_0_0__20 [label = <>, weight = 100]
+P0_3_1_1__18 [label = "!", shape = ellipse]
+P0_3_1_2__18 [label = "!", shape = ellipse]
+P0_3_1_0_0__20 -> P0_3_1_0_0__21 [label = <>, weight = 100]
+P0_3_0__12 -> P0_3_0__13 [label = <>, weight = 100]
+P0_2_3__17 [label = "", style = invisible]
+P0_2_3__16 -> P0_2_3__17 [label = <>, weight = 100, style = invisible]
+P0_2_2__19 [label = "", style = invisible]
+P0_2_2__18 -> P0_2_2__19 [label = <>, weight = 100, style = invisible]
+P0_2_1__21 [label = "", style = invisible]
+P0_2_1__20 -> P0_2_1__21 [label = <>, weight = 100, style = invisible]
+P0_2_0__23 [label = "", style = invisible]
+P0_2_0__22 -> P0_2_0__23 [label = <>, weight = 100, style = invisible]
+P0_1_4__23 -> P0_1_4__24 [label = <>, weight = 100]
+P0_1_3__32 [label = "", style = invisible]
+P0_1_3__31 -> P0_1_3__32 [label = <>, weight = 100, style = invisible]
+P0_1_2__36 [label = "", style = invisible]
+P0_1_2__35 -> P0_1_2__36 [label = <>, weight = 100, style = invisible]
+P0_1_1__40 [label = "", style = invisible]
+P0_1_1__39 -> P0_1_1__40 [label = <>, weight = 100, style = invisible]
+P0_1_0__44 [label = "", style = invisible]
+P0_1_0__43 -> P0_1_0__44 [label = <>, weight = 100, style = invisible]
+P0_0_1__38 -> P0_0_1__39 [label = <>, weight = 100]
+P0_0_0__38 -> P0_0_0__39 [label = <>, weight = 100]
+P__52 -> P__53 [label = <>, weight = 100]
+{rank = same; P__53 P0_0_0__39 P0_0_1__39 P0_1_0__44 P0_1_1__40 P0_1_2__36 P0_1_3__32 P0_1_4__24 P0_2_0__23 P0_2_1__21 P0_2_2__19 P0_2_3__17 P0_3_0__13 P0_3_1_0_0__21}
+P0_3_1_0_0__21 -> P0_3_1_0_0__22 [label = <>, weight = 100]
+P__53 -> P__54 [label = <>, weight = 100]
+{rank = same; P__54 P0_3_1_0_0__22}
+P0_3_1_0_0__22 -> P__54 [label = <~X_4>, dir = back, arrowhead = normal]
+P0_3_1_0_0__22 -> P0_3_1_0_0__23 [label = <>, weight = 100]
+P0_3_0__13 -> P0_3_0__14 [label = <>, weight = 100]
+P0_2_3__18 [label = "", style = invisible]
+P0_2_3__17 -> P0_2_3__18 [label = <>, weight = 100, style = invisible]
+P0_2_2__20 [label = "", style = invisible]
+P0_2_2__19 -> P0_2_2__20 [label = <>, weight = 100, style = invisible]
+P0_2_1__22 [label = "", style = invisible]
+P0_2_1__21 -> P0_2_1__22 [label = <>, weight = 100, style = invisible]
+P0_2_0__24 [label = "", style = invisible]
+P0_2_0__23 -> P0_2_0__24 [label = <>, weight = 100, style = invisible]
+P0_1_4__24 -> P0_1_4__25 [label = <>, weight = 100]
+P0_1_3__33 [label = "", style = invisible]
+P0_1_3__32 -> P0_1_3__33 [label = <>, weight = 100, style = invisible]
+P0_1_2__37 [label = "", style = invisible]
+P0_1_2__36 -> P0_1_2__37 [label = <>, weight = 100, style = invisible]
+P0_1_1__41 [label = "", style = invisible]
+P0_1_1__40 -> P0_1_1__41 [label = <>, weight = 100, style = invisible]
+P0_1_0__45 [label = "", style = invisible]
+P0_1_0__44 -> P0_1_0__45 [label = <>, weight = 100, style = invisible]
+P0_0_1__39 -> P0_0_1__40 [label = <>, weight = 100]
+P0_0_0__39 -> P0_0_0__40 [label = <>, weight = 100]
+P__54 -> P__55 [label = <>, weight = 100]
+{rank = same; P__55 P0_0_0__40 P0_0_1__40 P0_1_0__45 P0_1_1__41 P0_1_2__37 P0_1_3__33 P0_1_4__25 P0_2_0__24 P0_2_1__22 P0_2_2__20 P0_2_3__18 P0_3_0__14 P0_3_1_0_0__23}
+P0_3_1_0_0__23 -> P0_3_1_0_0__24 [label = <>, weight = 100]
+P0_3_1_0_0__24 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{47}</FONT><FONT COLOR="blue">event</FONT> RevocationAsked(vid_7,cert(vid_7,pk(<br/>
+vsk_3),cask_3),pseudocert(pk(cask_3),gsk(attvid_5,<br/>
+gmsk_4)))</TD></TR></TABLE>>]
+P0_3_1_0_0__24 -> P0_3_1_0_0__25 [label = <>, weight = 100]
+P0_3_1_0_0__25 -> P0_3_1_0_0__26 [label = <>, weight = 100]
+P0_3_0__14 -> P0_3_0__15 [label = <>, weight = 100]
+P0_2_3__19 [label = "", style = invisible]
+P0_2_3__18 -> P0_2_3__19 [label = <>, weight = 100, style = invisible]
+P0_2_2__21 [label = "", style = invisible]
+P0_2_2__20 -> P0_2_2__21 [label = <>, weight = 100, style = invisible]
+P0_2_1__23 [label = "", style = invisible]
+P0_2_1__22 -> P0_2_1__23 [label = <>, weight = 100, style = invisible]
+P0_2_0__25 [label = "", style = invisible]
+P0_2_0__24 -> P0_2_0__25 [label = <>, weight = 100, style = invisible]
+P0_1_4__25 -> P0_1_4__26 [label = <>, weight = 100]
+P0_1_3__34 [label = "", style = invisible]
+P0_1_3__33 -> P0_1_3__34 [label = <>, weight = 100, style = invisible]
+P0_1_2__38 [label = "", style = invisible]
+P0_1_2__37 -> P0_1_2__38 [label = <>, weight = 100, style = invisible]
+P0_1_1__42 [label = "", style = invisible]
+P0_1_1__41 -> P0_1_1__42 [label = <>, weight = 100, style = invisible]
+P0_1_0__46 [label = "", style = invisible]
+P0_1_0__45 -> P0_1_0__46 [label = <>, weight = 100, style = invisible]
+P0_0_1__40 -> P0_0_1__41 [label = <>, weight = 100]
+P0_0_0__40 -> P0_0_0__41 [label = <>, weight = 100]
+P__55 -> P__56 [label = <>, weight = 100]
+{rank = same; P__56 P0_0_0__41 P0_0_1__41 P0_1_0__46 P0_1_1__42 P0_1_2__38 P0_1_3__34 P0_1_4__26 P0_2_0__25 P0_2_1__23 P0_2_2__21 P0_2_3__19 P0_3_0__15 P0_3_1_0_0__26}
+P0_3_1_0_0__26 -> P0_3_1_0_0__27 [label = <>, weight = 100]
+P__56 -> P__57 [label = <>, weight = 100]
+{rank = same; P__57 P0_3_1_0_0__27}
+P0_3_1_0_0__27 -> P__57 [label = <~M_18>, arrowhead = normal]
+P0_3_1_0_0__27 -> P0_3_1_0_0__28 [label = <>, weight = 100]
+P0_3_0__15 -> P0_3_0__16 [label = <>, weight = 100]
+P0_2_3__20 [label = "", style = invisible]
+P0_2_3__19 -> P0_2_3__20 [label = <>, weight = 100, style = invisible]
+P0_2_2__22 [label = "", style = invisible]
+P0_2_2__21 -> P0_2_2__22 [label = <>, weight = 100, style = invisible]
+P0_2_1__24 [label = "", style = invisible]
+P0_2_1__23 -> P0_2_1__24 [label = <>, weight = 100, style = invisible]
+P0_2_0__26 [label = "", style = invisible]
+P0_2_0__25 -> P0_2_0__26 [label = <>, weight = 100, style = invisible]
+P0_1_4__26 -> P0_1_4__27 [label = <>, weight = 100]
+P0_1_3__35 [label = "", style = invisible]
+P0_1_3__34 -> P0_1_3__35 [label = <>, weight = 100, style = invisible]
+P0_1_2__39 [label = "", style = invisible]
+P0_1_2__38 -> P0_1_2__39 [label = <>, weight = 100, style = invisible]
+P0_1_1__43 [label = "", style = invisible]
+P0_1_1__42 -> P0_1_1__43 [label = <>, weight = 100, style = invisible]
+P0_1_0__47 [label = "", style = invisible]
+P0_1_0__46 -> P0_1_0__47 [label = <>, weight = 100, style = invisible]
+P0_0_1__41 -> P0_0_1__42 [label = <>, weight = 100]
+P0_0_0__41 -> P0_0_0__42 [label = <>, weight = 100]
+P__57 -> P__58 [label = <>, weight = 100]
+{rank = same; P__58 P0_0_0__42 P0_0_1__42 P0_1_0__47 P0_1_1__43 P0_1_2__39 P0_1_3__35 P0_1_4__27 P0_2_0__26 P0_2_1__24 P0_2_2__22 P0_2_3__20 P0_3_0__16 P0_3_1_0_0__28}
+P0_3_1_0_0__29 [label = "", width = 0.3, height = 0.3]
+P0_3_1_0_0__28 -> P0_3_1_0_0__29 [label = <>, weight = 100]
+P0_0_1__42 -> P0_0_1__43 [label = <>, weight = 100]
+P0_0_0__42 -> P0_0_0__43 [label = <>, weight = 100]
+P__58 -> P__59 [label = <>, weight = 100]
+{rank = same; P__59 P0_0_0__43 P0_0_1__43}
+P0_0_1__43 -> P0_0_1__44 [label = <>, weight = 100]
+P__59 -> P__60 [label = <>, weight = 100]
+{rank = same; P__60 P0_0_1__44}
+P0_0_1__44 -> P__60 [label = <~X_5>, dir = back, arrowhead = normal]
+P0_0_1__44 -> P0_0_1__45 [label = <>, weight = 100]
+P0_0_0__43 -> P0_0_0__44 [label = <>, weight = 100]
+P__60 -> P__61 [label = <>, weight = 100]
+{rank = same; P__61 P0_0_0__44 P0_0_1__45}
+P0_0_1__45 -> P0_0_1__46 [label = <>, weight = 100]
+P0_0_1__46 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{153}</FONT><FONT COLOR="blue">get</FONT> revokedcerts(=attvid_8): else branch taken<br/>
+</TD></TR><TR><TD><FONT COLOR="darkgreen">{126}</FONT><FONT COLOR="blue">event</FONT> ValidRevocationReportReceived(pseudocert(<br/>
+a_11,gsk(attvid_5,gmsk_4)),cert(attvid_8,pk(attsk_8),<br/>
+cask_3))</TD></TR><TR><TD><FONT COLOR="darkgreen">{152}</FONT><FONT COLOR="blue">get</FONT> revokedcerts(=attvid_5): else branch taken<br/>
+</TD></TR><TR><TD><FONT COLOR="darkgreen">{129}</FONT><FONT COLOR="blue">event</FONT> RevokedVid(attvid_5)</TD></TR></TABLE>>]
+P0_0_1__46 -> P0_0_1__47 [label = <>, weight = 100]
+P__61 -> P__62 [label = <>, weight = 100]
+{rank = same; P__62 P0_0_1__46}
+P0_0_0__44 -> P0_0_0__45 [label = <>, weight = 100]
+P__62 -> P__63 [label = <>, weight = 100]
+{rank = same; P__63 P0_0_0__45}
+P0_0_0__45 -> P0_0_0__46 [label = <>, weight = 100]
+P__63 -> P__64 [label = <>, weight = 100]
+{rank = same; P__64 P0_0_0__46}
+P0_0_0__46 -> P__64 [label = <~M_18>, dir = back, arrowhead = normal]
+P0_0_0__46 -> P0_0_0__47 [label = <>, weight = 100]
+P__64 -> P__65 [label = <>, weight = 100]
+{rank = same; P__65 P0_0_0__47}
+P0_0_0__47 -> P0_0_0__48 [label = <>, weight = 100]
+P0_0_0__48 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{153}</FONT><FONT COLOR="blue">get</FONT> revokedcerts(=vid_7): else branch taken<br/>
+</TD></TR><TR><TD><FONT COLOR="darkgreen">{126}</FONT><FONT COLOR="blue">event</FONT> ValidRevocationReportReceived(pseudocert(<br/>
+pk(cask_3),gsk(attvid_5,gmsk_4)),cert(vid_7,pk(<br/>
+vsk_3),cask_3))</TD></TR><TR><TD><FONT COLOR="darkgreen">{152}</FONT><FONT COLOR="blue">get</FONT> revokedcerts(=attvid_5): else branch taken<br/>
+</TD></TR></TABLE>>]
+P0_0_0__48 -> P0_0_0__49 [label = <>, weight = 100]
+P__65 -> P__66 [label = <>, weight = 100]
+{rank = same; P__66 P0_0_0__48}
+P0_0_0__49 -> P0_0_0__50 [label = <>, weight = 100]
+P0_0_0__50 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{129}</FONT><FONT COLOR="blue">event</FONT> RevokedVid(attvid_5)</TD></TR></TABLE>>]
+P0_0_0__50 -> P0_0_0__51 [label = <>, weight = 100]
+P0_0_0__51 -> P0_0_0__52 [label = <>, weight = 100]
+P0_0_0__52 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{130}</FONT><FONT COLOR="blue">insert </FONT>revokedcerts(attvid_5)</TD></TR></TABLE>>]
+P0_0_0__52 -> P0_0_0__53 [label = <>, weight = 100]
+P__66 -> P__67 [label = <>, weight = 100]
+{rank = same; P__67 P0_0_0__52}
+P0_1_4__27 -> P0_1_4__28 [label = <>, weight = 100]
+P0_1_4__28 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{115}</FONT><FONT COLOR="blue">get </FONT>revokedcerts(attvid_5)</TD></TR></TABLE>>]
+P0_1_4__28 -> P0_1_4__29 [label = <>, weight = 100]
+P__67 -> P__68 [label = <>, weight = 100]
+{rank = same; P__68 P0_1_4__28}
+P0_1_4__29 -> P0_1_4__30 [label = <>, weight = 100]
+P0_1_4__30 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{106}</FONT><FONT COLOR="blue">event</FONT> RevokedCannotGetGroupKey(attvid_5)</TD></TR></TABLE>>]
+P0_1_4__30 -> P0_1_4__31 [label = <>, weight = 100]
+Abbrev [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR> <TD> Abbreviations </TD></TR><TR><TD>~X_1 = aenc((groupkey_request,sign(groupkey_request,~M_8),<br/>
+~M_9),~M)<br/>
+= aenc((groupkey_request,sign(groupkey_request,<br/>
+attsk_7),cert(attvid_7,pk(attsk_7),cask_3)),pk(<br/>
+cask_3))</TD></TR><TR><TD>~M_14 = aenc(((groupkey_response,attvid_7,gsk(<br/>
+attvid_7,gmsk_4),gpk(gmsk_4)),sign((groupkey_response,<br/>
+attvid_7,gsk(attvid_7,gmsk_4),gpk(gmsk_4)),cask_3)),<br/>
+pk(attsk_7))</TD></TR><TR><TD>~X_2 = aenc((groupkey_request,sign(groupkey_request,~M_5),<br/>
+~M_6),~M)<br/>
+= aenc((groupkey_request,sign(groupkey_request,<br/>
+attsk_6),cert(attvid_6,pk(attsk_6),cask_3)),pk(<br/>
+cask_3))</TD></TR><TR><TD>~M_15 = aenc(((groupkey_response,attvid_6,gsk(<br/>
+attvid_6,gmsk_4),gpk(gmsk_4)),sign((groupkey_response,<br/>
+attvid_6,gsk(attvid_6,gmsk_4),gpk(gmsk_4)),cask_3)),<br/>
+pk(attsk_6))</TD></TR><TR><TD>~X_3 = aenc((groupkey_request,sign(groupkey_request,~M_2),<br/>
+~M_3),~M)<br/>
+= aenc((groupkey_request,sign(groupkey_request,<br/>
+attsk_5),cert(attvid_5,pk(attsk_5),cask_3)),pk(<br/>
+cask_3))</TD></TR><TR><TD>~M_16 = aenc(((groupkey_response,attvid_5,gsk(<br/>
+attvid_5,gmsk_4),gpk(gmsk_4)),sign((groupkey_response,<br/>
+attvid_5,gsk(attvid_5,gmsk_4),gpk(gmsk_4)),cask_3)),<br/>
+pk(attsk_5))</TD></TR><TR><TD>~M_17 = aenc(((groupkey_response,vid_7,gsk(vid_7,<br/>
+gmsk_4),gpk(gmsk_4)),sign((groupkey_response,vid_7,<br/>
+gsk(vid_7,gmsk_4),gpk(gmsk_4)),cask_3)),pk(vsk_3))</TD></TR><TR><TD>~X_4 = ((groupkey_response,~M_4,3-proj-4-tuple(1-proj-2-tuple(<br/>
+adec(~M_15,~M_5))),4-proj-4-tuple(1-proj-2-tuple(<br/>
+adec(~M_14,~M_8)))),2-proj-2-tuple(adec(~M_15,<br/>
+~M_5)),pseudocert(~M,3-proj-4-tuple(1-proj-2-tuple(<br/>
+adec(~M_16,~M_2)))))<br/>
+= ((groupkey_response,attvid_6,<br/>
+gsk(attvid_6,gmsk_4),gpk(gmsk_4)),sign((groupkey_response,<br/>
+attvid_6,gsk(attvid_6,gmsk_4),gpk(gmsk_4)),cask_3),<br/>
+pseudocert(pk(cask_3),gsk(attvid_5,gmsk_4)))</TD></TR><TR><TD>~M_18 = aenc(((pseudocert(pk(cask_3),gsk(attvid_5,<br/>
+gmsk_4)),revoke_request),sign((pseudocert(pk(cask_3),<br/>
+gsk(attvid_5,gmsk_4)),revoke_request),vsk_3),cert(<br/>
+vid_7,pk(vsk_3),cask_3)),pk(cask_3))</TD></TR><TR><TD>~X_5 = aenc(((pseudocert(a_11,3-proj-4-tuple(1-proj-2-tuple(<br/>
+adec(~M_16,~M_2)))),revoke_request),sign((pseudocert(<br/>
+a_11,3-proj-4-tuple(1-proj-2-tuple(adec(~M_16,<br/>
+~M_2)))),revoke_request),~M_11),~M_12),~M)<br/>
+= aenc(<br/>
+((pseudocert(a_11,gsk(attvid_5,gmsk_4)),revoke_request),<br/>
+sign((pseudocert(a_11,gsk(attvid_5,gmsk_4)),revoke_request),<br/>
+attsk_8),cert(attvid_8,pk(attsk_8),cask_3)),pk(<br/>
+cask_3))</TD></TR></TABLE>>]Abbrev -> P__0 [style = invisible, weight =100]}
