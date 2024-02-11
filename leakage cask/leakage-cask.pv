@@ -91,21 +91,21 @@ query vid:bitstring, vgsk:gskey, vgpk:gpkey, attpk:pkey;
 (* Q1.3 - Sanity check: Vehicle/Attacker cannot get a valid group key when it is revoked - result: FALSE, TRUE 
 query vid:bitstring; event(RevokedCannotGetGroupKey(vid)).
 query vid:bitstring; event(RevokedCannotGetGroupKey(vid)) ==> event(RevokedVid(vid)).*)
-(* Q1.4 - Sanity check: Vehicle sends broadcast message - result: FALSE *)
-query vid:bitstring, vpseudocert:certype, m:bitstring; event(ValidMessageSent(vid, vpseudocert, m)).(*
-(* Q1.5 - Sanity check: Attacker sends broadcast message - result: FALSE, TRUE *)
+(* Q1.4 - Sanity check: Vehicle sends broadcast message - result: FALSE 
+query vid:bitstring, vpseudocert:certype, m:bitstring; event(ValidMessageSent(vid, vpseudocert, m)).*)
+(* Q1.5 - Sanity check: Attacker sends broadcast message - result: FALSE, TRUE 
 query sendervid:bitstring, vpseudocert:certype, receivervid:bitstring, m:bitstring;
 	event(ValidMessageReceived(receivervid, m)) ==> event(ValidMessageSent(sendervid, vpseudocert, m)).
 query sendervid:bitstring, vpseudocert:certype, receivervid:bitstring, m:bitstring, attpk:pkey;
-	event(ValidMessageReceived(receivervid, m)) ==> event(ValidMessageSent(sendervid, vpseudocert, m)) || event(AttackerGetsEnrollmentCertificate(sendervid, attpk)).
-(* Q1.6 - Sanity check: not event AlreadyRevoked - result: FALSE *)
-query vid:bitstring; event(AlreadyRevoked(vid)).
+	event(ValidMessageReceived(receivervid, m)) ==> event(ValidMessageSent(sendervid, vpseudocert, m)) || event(AttackerGetsEnrollmentCertificate(sendervid, attpk)).*)
+(* Q1.6 - Sanity check: not event AlreadyRevoked - result: FALSE 
+query vid:bitstring; event(AlreadyRevoked(vid)).*)
 (* Q1.7 - Sanity check: attacker can ask revocation of another vehicle - result: FALSE *)
 query torevokecert:certype, vcert:certype, vid:bitstring; event(ValidRevocationReportReceived(torevokecert, vcert)) ==> event(RevocationAsked(vid, vcert, torevokecert)).
 query torevokecert:certype, vcert:certype, vid:bitstring, attpk:pkey; 
 	event(ValidRevocationReportReceived(torevokecert, vcert)) ==> event(RevocationAsked(vid, vcert, torevokecert)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).
 
-(* Qx.x - Temporal constraint: revoked cannot get key and revoke event - result: cannot be proved *)
+(* Qx.x - Temporal constraint: revoked cannot get key and revoke event - result: cannot be proved *) (*
 query vid:bitstring, t1:time, t2:time; event(RevokedCannotGetGroupKey(vid))@t2 && event(RevokedVid(vid))@t1 ==> t1 < t2.
 
 (* Qx.2 - Temporal constraint: cannot receive a valid message from a vehicle that has been removed *)
@@ -303,6 +303,6 @@ process
 	)	
 	| !CARegister(gmsk, cask, capk)
 	| !CARevoke(gmsk, cask, capk)
-	| CASecretKeyReveal(cask)
-	(* | CAGroupMasterSecretKeyReveal(gmsk) *)
+(*	 | CASecretKeyReveal(cask)
+	| CAGroupMasterSecretKeyReveal(gmsk) *)
 
