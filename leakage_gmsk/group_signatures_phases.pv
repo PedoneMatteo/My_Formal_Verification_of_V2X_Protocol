@@ -78,8 +78,8 @@ event CAGMSKReveal(gmskey).
 
 
 (* Queries *)
-(* Q1.1 - Sanity check: Vehicle can get a valid group key - result: not event FALSE (in both phases) *)
-query vid:bitstring, vgsk:gskey, vgpk:gpkey; event(ValidGroupPrivateKeyReceived(vid, vgsk, vgpk)).
+(* Q1.1 - Sanity check: Vehicle can get a valid group key - result: not event FALSE (in both phases) *)(*
+query vid:bitstring, vgsk:gskey, vgpk:gpkey; event(ValidGroupPrivateKeyReceived(vid, vgsk, vgpk)).	
 (* Q1.2 - Sanity check: Attacker can get a valid group key - result: FALSE - TRUE *)
 query vid:bitstring, vgsk:gskey, vgpk:gpkey; 
 	event(ValidGroupPrivateKeySent(vid, vgsk, vgpk)) ==> event(ValidGroupKeyRequestSent(vid)).
@@ -120,11 +120,11 @@ query vid:bitstring, vgsk:gskey, vgpk:gpkey, cask:skey; event(ValidGroupPrivateK
 (* Q2.2 - Authentication of the Vehilce in Vehicle Registration - result: *)
 query cask:skey, vid:bitstring, attpk:pkey; 
 	event(ValidGroupKeyRequestReceived(cask, vid)) ==> event(ValidGroupKeyRequestSent(vid)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).
-
-(* Q3 - Weak secrecy: the identity of the vehicle should remain secret (reachability property) *)
+*)
+(* Q3 - Weak secrecy: the identity of the vehicle should remain secret (reachability property) 
 query attacker(new vid).				(* TODO: per ora decommento il fatto che ci può essere gmsk leackage, si potrebbero differenziare i casi
 						   	e vedere cosa succede 1) rivelando la cask 2) rivelando gmsk *)
-
+*)
 
 
 
@@ -132,7 +132,7 @@ let CASecretKeyReveal(cask:skey) =
 	event CASKReveal(cask);
 	out(ch, cask).
 	
-let CAGroupMasterSecretKeyReveal(gmsk:gmskey) =
+let GroupMasterSecretKeyReveal(gmsk:gmskey) =
 	event CAGMSKReveal(gmsk);
 	out(ch, gmsk).
 
@@ -209,9 +209,7 @@ let VehicleRegistration(vid:bitstring, vsk:skey, vcert:certype, capk:pkey) =
 
 	( !VehicleSendMessages(vid, vgsk) | !VehicleReceiveMessage(vid, vgpk) | !VehicleReport(vid, vsk, vcert, capk, vgpk) ).
 	
-
-		
-let CARegister(gmsk:gmskey, cask: skey, capk:pkey) = 
+let RSU_Register(gmsk:gmskey, cask: skey, capk:pkey) = 
 	in(ch, encsignreq:bitstring);
 	(* Decrypt the request *)
 	let (req:bitstring, signreq:bitstring, vcert:certype) = adec(encsignreq, cask) in
@@ -240,7 +238,7 @@ let CARegister(gmsk:gmskey, cask: skey, capk:pkey) =
 	out(ch, encsignresp).
 	
 	
-let CARevoke(gmsk:gmskey, cask: skey, capk:pkey) = 
+let RSU_Revoke(gmsk:gmskey, cask: skey, capk:pkey) = 
 	(* CA receives a revocation request *)
 	in(ch, encrevreq:bitstring);
 	(* Decrypt the report *)
@@ -273,7 +271,7 @@ let CARevoke(gmsk:gmskey, cask: skey, capk:pkey) =
 	new updatedgmsk:gmskey;
 	(* Start new phase: not revoked vehicles have to ask for a new key *)
 	phase 2;
-	!CARegister(updatedgmsk, cask, capk).
+	!RSU_Register(updatedgmsk, cask, capk).
 
 
 
@@ -283,7 +281,7 @@ process
 	let capk = pk(cask) in
 	out(ch, capk);
 	(* Create vehicles *)
-	(	(* Enrollment certificate *)
+	!(	(* Enrollment certificate *)
 		new vid:bitstring; 
 		new vsk:skey; 
 		let vpk = pk(vsk) in
@@ -302,8 +300,8 @@ process
 		event AttackerGetsEnrollmentCertificate(attvid, attpk);
 		out(ch, (attvid, attsk, attcert))
 	)	
-	| !CARegister(gmsk, cask, capk)
-	| !CARevoke(gmsk, cask, capk)
+	| !RSU_Register(gmsk, cask, capk)
+	| !RSU_Revoke(gmsk, cask, capk)
 	(* | CASecretKeyReveal(cask)*)
-	| CAGroupMasterSecretKeyReveal(gmsk) 
+	| GroupMasterSecretKeyReveal(gmsk) 
 

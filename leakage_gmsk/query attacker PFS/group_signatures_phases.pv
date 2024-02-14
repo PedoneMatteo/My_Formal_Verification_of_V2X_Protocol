@@ -20,8 +20,6 @@ const revoke_request:bitstring.
 const groupkey_request:bitstring.
 const groupkey_response:bitstring.
 
-free vid:bitstring [private].	(* the secret *)
-
 (* Asymmetric signature *)
 fun pk(skey):pkey.
 fun sign(bitstring, skey):bitstring.
@@ -80,40 +78,39 @@ event CAGMSKReveal(gmskey).
 
 
 (* Queries *)
-
-(* Q1.1 - Sanity check: Vehicle can get a valid group key - result: not event FALSE (in both phases) 
-query vid:bitstring, vgsk:gskey, vgpk:gpkey; event(ValidGroupPrivateKeyReceived(vid, vgsk, vgpk)).*)
-
-(* Q1.2 - Sanity check: Attacker can get a valid group key - result: FALSE - TRUE 
-query vid:bitstring, vgsk:gskey, vgpk:gpkey;  event(ValidGroupPrivateKeySent(vid, vgsk, vgpk)) ==> event(ValidGroupKeyRequestSent(vid)).	
+(* Q1.1 - Sanity check: Vehicle can get a valid group key - result: not event FALSE (in both phases) *)(*
+query vid:bitstring, vgsk:gskey, vgpk:gpkey; event(ValidGroupPrivateKeyReceived(vid, vgsk, vgpk)).	
+(* Q1.2 - Sanity check: Attacker can get a valid group key - result: FALSE - TRUE *)
+query vid:bitstring, vgsk:gskey, vgpk:gpkey; 
+	event(ValidGroupPrivateKeySent(vid, vgsk, vgpk)) ==> event(ValidGroupKeyRequestSent(vid)).
 query vid:bitstring, vgsk:gskey, vgpk:gpkey, attpk:pkey; 
-	event(ValidGroupPrivateKeySent(vid, vgsk, vgpk)) ==> event(ValidGroupKeyRequestSent(vid)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).*)
-(* Q1.3 - Sanity check: Vehicle/Attacker cannot get a valid group key when it is revoked - result: FALSE, TRUE 
+	event(ValidGroupPrivateKeySent(vid, vgsk, vgpk)) ==> event(ValidGroupKeyRequestSent(vid)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).
+(* Q1.3 - Sanity check: Vehicle/Attacker cannot get a valid group key when it is revoked - result: FALSE, TRUE *)
 query vid:bitstring; event(RevokedCannotGetGroupKey(vid)).
-query vid:bitstring; event(RevokedCannotGetGroupKey(vid)) ==> event(RevokedVid(vid)).*)
-(* Q1.4 - Sanity check: Vehicle sends broadcast message - result: FALSE 
-query vid:bitstring, vpseudocert:certype, m:bitstring; event(ValidMessageSent(vid, vpseudocert, m)).*)
-(* Q1.5 - Sanity check: Attacker sends broadcast message - result: FALSE, TRUE 
+query vid:bitstring; event(RevokedCannotGetGroupKey(vid)) ==> event(RevokedVid(vid)).
+(* Q1.4 - Sanity check: Vehicle sends broadcast message - result: FALSE *)
+query vid:bitstring, vpseudocert:certype, m:bitstring; event(ValidMessageSent(vid, vpseudocert, m)).
+(* Q1.5 - Sanity check: Attacker sends broadcast message - result: FALSE, TRUE *)
 query sendervid:bitstring, vpseudocert:certype, receivervid:bitstring, m:bitstring;
 	event(ValidMessageReceived(receivervid, m)) ==> event(ValidMessageSent(sendervid, vpseudocert, m)).
 query sendervid:bitstring, vpseudocert:certype, receivervid:bitstring, m:bitstring, attpk:pkey;
-	event(ValidMessageReceived(receivervid, m)) ==> event(ValidMessageSent(sendervid, vpseudocert, m)) || event(AttackerGetsEnrollmentCertificate(sendervid, attpk)).*)
-(* Q1.6 - Sanity check: not event AlreadyRevoked - result: FALSE 
-query vid:bitstring; event(AlreadyRevoked(vid)).*)
-(* Q1.7 - Sanity check: attacker can ask revocation of another vehicle - result: FALSE 
+	event(ValidMessageReceived(receivervid, m)) ==> event(ValidMessageSent(sendervid, vpseudocert, m)) || event(AttackerGetsEnrollmentCertificate(sendervid, attpk)).
+(* Q1.6 - Sanity check: not event AlreadyRevoked - result: FALSE *)
+query vid:bitstring; event(AlreadyRevoked(vid)).
+(* Q1.7 - Sanity check: attacker can ask revocation of another vehicle - result: FALSE *)
 query torevokecert:certype, vcert:certype, vid:bitstring; event(ValidRevocationReportReceived(torevokecert, vcert)) ==> event(RevocationAsked(vid, vcert, torevokecert)).
 query torevokecert:certype, vcert:certype, vid:bitstring, attpk:pkey; 
-	event(ValidRevocationReportReceived(torevokecert, vcert)) ==> event(RevocationAsked(vid, vcert, torevokecert)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).*)
+	event(ValidRevocationReportReceived(torevokecert, vcert)) ==> event(RevocationAsked(vid, vcert, torevokecert)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).
 
-(* Qx.x - Temporal constraint: revoked cannot get key and revoke event - result: cannot be proved 
-query vid:bitstring, t1:time, t2:time; event(RevokedCannotGetGroupKey(vid))@t2 && event(RevokedVid(vid))@t1 ==> t1 < t2.*) 
+(* Qx.x - Temporal constraint: revoked cannot get key and revoke event - result: cannot be proved *)
+query vid:bitstring, t1:time, t2:time; event(RevokedCannotGetGroupKey(vid))@t2 && event(RevokedVid(vid))@t1 ==> t1 < t2.
 
-(* Qx.2 - Temporal constraint: cannot receive a valid message from a vehicle that has been removed*)
+(* Qx.2 - Temporal constraint: cannot receive a valid message from a vehicle that has been removed *)
 query sendervid:bitstring, vpseudocert:certype, receivervid:bitstring, m:bitstring, t1:time, t2:time, t3:time; 
-	event(ValidMessageSent(sendervid, vpseudocert, m))@t1 && event(ValidMessageReceived(receivervid, m))@t2 && event(RevokedVid(sendervid))@t3 ==> t1 < t2 && t2 < t3. 
+	event(ValidMessageSent(sendervid, vpseudocert, m))@t1 && event(ValidMessageReceived(receivervid, m))@t2 && event(RevokedVid(sendervid))@t3 ==> t1 < t2 && t2 < t3.
 (* ATTACK FOUND attacker sends -> (m, sign(m, oldsk), pseudocert(pk(oldsk), sign using new gsk) *)
 
-(* Qx.3 - FALSE *)(*
+(* Qx.3 - FALSE *)
 query sendervid:bitstring, t1:time, t2:time; event(ValidMessageReceivedSenderVid(sendervid))@t1 && event(RevokedVid(sendervid))@t2 ==> t1 < t2.
 
 (* Q2.1 - Authentication of CA in Vehicle Registration - result: TRUE *)
@@ -124,15 +121,18 @@ query vid:bitstring, vgsk:gskey, vgpk:gpkey, cask:skey; event(ValidGroupPrivateK
 query cask:skey, vid:bitstring, attpk:pkey; 
 	event(ValidGroupKeyRequestReceived(cask, vid)) ==> event(ValidGroupKeyRequestSent(vid)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).
 *)
-(* Q3 - Weak secrecy: the identity of the vehicle should remain secret (reachability property)
-query attacker(new vid).		 *)		(* TODO: per ora decommento il fatto che ci può essere gmsk leackage, si potrebbero differenziare i casi
-						   	e vedere cosa succede 1) rivelando la cask 2) rivelando gmsk *)	
+(* Q3 - Weak secrecy: the identity of the vehicle should remain secret (reachability property) *)
+query attacker(new vid).				(* TODO: per ora decommento il fatto che ci può essere gmsk leackage, si potrebbero differenziare i casi
+						   	e vedere cosa succede 1) rivelando la cask 2) rivelando gmsk *)
+
+
+
 
 let CASecretKeyReveal(cask:skey) = 
 	event CASKReveal(cask);
 	out(ch, cask).
 	
-let CAGroupMasterSecretKeyReveal(gmsk:gmskey) =
+let GroupMasterSecretKeyReveal(gmsk:gmskey) =
 	event CAGMSKReveal(gmsk);
 	out(ch, gmsk).
 
@@ -209,9 +209,7 @@ let VehicleRegistration(vid:bitstring, vsk:skey, vcert:certype, capk:pkey) =
 
 	( !VehicleSendMessages(vid, vgsk) | !VehicleReceiveMessage(vid, vgpk) | !VehicleReport(vid, vsk, vcert, capk, vgpk) ).
 	
-
-		
-let CARegister(gmsk:gmskey, cask: skey, capk:pkey) = 
+let RSU_Register(gmsk:gmskey, cask: skey, capk:pkey) = 
 	in(ch, encsignreq:bitstring);
 	(* Decrypt the request *)
 	let (req:bitstring, signreq:bitstring, vcert:certype) = adec(encsignreq, cask) in
@@ -240,7 +238,7 @@ let CARegister(gmsk:gmskey, cask: skey, capk:pkey) =
 	out(ch, encsignresp).
 	
 	
-let CARevoke(gmsk:gmskey, cask: skey, capk:pkey) = 
+let RSU_Revoke(gmsk:gmskey, cask: skey, capk:pkey) = 
 	(* CA receives a revocation request *)
 	in(ch, encrevreq:bitstring);
 	(* Decrypt the report *)
@@ -273,7 +271,8 @@ let CARevoke(gmsk:gmskey, cask: skey, capk:pkey) =
 	new updatedgmsk:gmskey;
 	(* Start new phase: not revoked vehicles have to ask for a new key *)
 	phase 2;
-	!CARegister(updatedgmsk, cask, capk).
+	( !RSU_Register(updatedgmsk, cask, capk) | GroupMasterSecretKeyReveal(updatedgmsk) ).
+
 
 
 process 
@@ -286,7 +285,7 @@ process
 		new vid:bitstring; 
 		new vsk:skey; 
 		let vpk = pk(vsk) in
-		let vcert = cert(vid, vpk, cask) in	
+		let vcert = cert(vid, vpk, cask) in
 		( VehicleRegistration(vid, vsk, vcert, capk) | 
 		  phase 2;
 		  VehicleRegistration(vid, vsk, vcert, capk)
@@ -301,8 +300,8 @@ process
 		event AttackerGetsEnrollmentCertificate(attvid, attpk);
 		out(ch, (attvid, attsk, attcert))
 	)	
-	| !CARegister(gmsk, cask, capk)
-	| !CARevoke(gmsk, cask, capk)
-	 | CASecretKeyReveal(cask)
-(*	| CAGroupMasterSecretKeyReveal(gmsk) *)
+	| !RSU_Register(gmsk, cask, capk)
+	| !RSU_Revoke(gmsk, cask, capk)
+	(* | CASecretKeyReveal(cask)*)
+	
 

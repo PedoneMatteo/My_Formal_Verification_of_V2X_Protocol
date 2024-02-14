@@ -108,18 +108,18 @@ query torevokecert:certype, vcert:certype, vid:bitstring, attpk:pkey;
 (* Qx.x - Temporal constraint: revoked cannot get key and revoke event - result: cannot be proved 
 query vid:bitstring, t1:time, t2:time; event(RevokedCannotGetGroupKey(vid))@t2 && event(RevokedVid(vid))@t1 ==> t1 < t2.*) 
 
-(* Qx.2 - Temporal constraint: cannot receive a valid message from a vehicle that has been removed*)
+(* Qx.2 - Temporal constraint: cannot receive a valid message from a vehicle that has been removed
 query sendervid:bitstring, vpseudocert:certype, receivervid:bitstring, m:bitstring, t1:time, t2:time, t3:time; 
-	event(ValidMessageSent(sendervid, vpseudocert, m))@t1 && event(ValidMessageReceived(receivervid, m))@t2 && event(RevokedVid(sendervid))@t3 ==> t1 < t2 && t2 < t3. 
+	event(ValidMessageSent(sendervid, vpseudocert, m))@t1 && event(ValidMessageReceived(receivervid, m))@t2 && event(RevokedVid(sendervid))@t3 ==> t1 < t2 && t2 < t3. *)
 (* ATTACK FOUND attacker sends -> (m, sign(m, oldsk), pseudocert(pk(oldsk), sign using new gsk) *)
 
-(* Qx.3 - FALSE *)(*
-query sendervid:bitstring, t1:time, t2:time; event(ValidMessageReceivedSenderVid(sendervid))@t1 && event(RevokedVid(sendervid))@t2 ==> t1 < t2.
+(* Qx.3 - FALSE 
+query sendervid:bitstring, t1:time, t2:time; event(ValidMessageReceivedSenderVid(sendervid))@t1 && event(RevokedVid(sendervid))@t2 ==> t1 < t2.*)
 
 (* Q2.1 - Authentication of CA in Vehicle Registration - result: TRUE *)
 query vid:bitstring, vgsk:gskey, vgpk:gpkey, cask:skey; event(ValidGroupPrivateKeyReceived(vid, vgsk, vgpk)) 
 	==> event(ValidGroupPrivateKeySent(vid, vgsk, vgpk)) || attacker(cask).
-	
+	(*
 (* Q2.2 - Authentication of the Vehilce in Vehicle Registration - result: *)
 query cask:skey, vid:bitstring, attpk:pkey; 
 	event(ValidGroupKeyRequestReceived(cask, vid)) ==> event(ValidGroupKeyRequestSent(vid)) || event(AttackerGetsEnrollmentCertificate(vid, attpk)).
@@ -303,6 +303,6 @@ process
 	)	
 	| !CARegister(gmsk, cask, capk)
 	| !CARevoke(gmsk, cask, capk)
-	 | CASecretKeyReveal(cask)
+ | CASecretKeyReveal(cask)
 (*	| CAGroupMasterSecretKeyReveal(gmsk) *)
 
