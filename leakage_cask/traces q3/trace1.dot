@@ -105,7 +105,7 @@ P__9 -> P__10 [label = <>, weight = 100]
 P0_4_0_1__14 -> P0_4_0_1__15 [label = <>, weight = 100]
 P__10 -> P__11 [label = <>, weight = 100]
 {rank = same; P__11 P0_4_0_1__15}
-P0_4_0_1__15 -> P__11 [label = <~X_1>, dir = back, arrowhead = normal]
+P0_4_0_1__15 -> P__11 [label = <Phase 2>, style = dotted]
 P0_4_0_1__15 -> P0_4_0_1__16 [label = <>, weight = 100]
 P0_4_0_0__11 -> P0_4_0_0__12 [label = <>, weight = 100]
 P0_3__10 [label = "", style = invisible]
@@ -119,14 +119,39 @@ P0_0__15 -> P0_0__16 [label = <>, weight = 100, style = invisible]
 P__11 -> P__12 [label = <>, weight = 100]
 {rank = same; P__12 P0_0__16 P0_1__10 P0_2__10 P0_3__10 P0_4_0_0__12 P0_4_0_1__16}
 P0_4_0_1__16 -> P0_4_0_1__17 [label = <>, weight = 100]
-P0_4_0_1__17 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{22}</FONT><FONT COLOR="blue">event</FONT> ValidGroupPrivateKeyReceived(vid_8,a_1,<br/>
-a_2)</TD></TR></TABLE>>]
+P0_4_0_1__17 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">VehicleRegistration</FONT></TD></TR><TR><TD><FONT COLOR="darkgreen">{56}</FONT><FONT COLOR="blue">event</FONT> ValidGroupKeyRequestSent(vid_8)</TD></TR></TABLE>>]
 P0_4_0_1__17 -> P0_4_0_1__18 [label = <>, weight = 100]
-Abbrev [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR> <TD> Abbreviations </TD></TR><TR><TD>~X_1 = aenc(((groupkey_response,getid(3-proj-3-tuple(<br/>
-adec(~M_2,~M_1))),a_1,a_2),sign((groupkey_response,<br/>
-getid(3-proj-3-tuple(adec(~M_2,~M_1))),a_1,a_2),<br/>
-~M_1)),getpk(3-proj-3-tuple(adec(~M_2,~M_1))))<br/>
-=<br/>
-aenc(((groupkey_response,vid_8,a_1,a_2),sign(<br/>
-(groupkey_response,vid_8,a_1,a_2),cask_4)),pk(<br/>
-vsk_4))</TD></TR></TABLE>>]Abbrev -> P__0 [style = invisible, weight =100]}
+P0_4_0_1__18 -> P0_4_0_1__19 [label = <>, weight = 100]
+P0_4_0_0__12 -> P0_4_0_0__13 [label = <>, weight = 100]
+P0_3__11 [label = "", style = invisible]
+P0_3__10 -> P0_3__11 [label = <>, weight = 100, style = invisible]
+P0_2__11 [label = "", style = invisible]
+P0_2__10 -> P0_2__11 [label = <>, weight = 100, style = invisible]
+P0_1__11 [label = "", style = invisible]
+P0_1__10 -> P0_1__11 [label = <>, weight = 100, style = invisible]
+P0_0__17 [label = "", style = invisible]
+P0_0__16 -> P0_0__17 [label = <>, weight = 100, style = invisible]
+P__12 -> P__13 [label = <>, weight = 100]
+{rank = same; P__13 P0_0__17 P0_1__11 P0_2__11 P0_3__11 P0_4_0_0__13 P0_4_0_1__19}
+P0_4_0_1__19 -> P0_4_0_1__20 [label = <>, weight = 100]
+P__13 -> P__14 [label = <>, weight = 100]
+{rank = same; P__14 P0_4_0_1__20}
+P0_4_0_1__20 -> P__14 [label = <~M_3 = aenc((groupkey_request,sign(groupkey_request,<br/>
+vsk_4),cert(vid_8,pk(vsk_4),cask_4)),pk(cask_4))>, arrowhead = normal]
+P0_4_0_1__20 -> P0_4_0_1__21 [label = <>, weight = 100]
+P0_4_0_0__13 -> P0_4_0_0__14 [label = <>, weight = 100]
+P0_3__12 [label = "", style = invisible]
+P0_3__11 -> P0_3__12 [label = <>, weight = 100, style = invisible]
+P0_2__12 [label = "", style = invisible]
+P0_2__11 -> P0_2__12 [label = <>, weight = 100, style = invisible]
+P0_1__12 [label = "", style = invisible]
+P0_1__11 -> P0_1__12 [label = <>, weight = 100, style = invisible]
+P0_0__18 [label = "", style = invisible]
+P0_0__17 -> P0_0__18 [label = <>, weight = 100, style = invisible]
+P__14 -> P__15 [label = <>, weight = 100]
+{rank = same; P__15 P0_0__18 P0_1__12 P0_2__12 P0_3__12 P0_4_0_0__14 P0_4_0_1__21}
+P__15 -> P__16 [label = <>, weight = 100]
+P__16 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>The attacker has the message getid(3-proj-3-tuple(<br/>
+adec(~M_2,~M_1))) = vid_8 in phase 2</TD></TR></TABLE>>]
+P__16 -> P__17 [label = <>, weight = 100]
+}

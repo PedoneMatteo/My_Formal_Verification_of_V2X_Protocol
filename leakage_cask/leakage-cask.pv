@@ -132,7 +132,7 @@ let CASecretKeyReveal(cask:skey) =
 	event CASKReveal(cask);
 	out(ch, cask).
 	
-let CAGroupMasterSecretKeyReveal(gmsk:gmskey) =
+let GroupMasterSecretKeyReveal(gmsk:gmskey) =
 	event CAGMSKReveal(gmsk);
 	out(ch, gmsk).
 
@@ -211,7 +211,7 @@ let VehicleRegistration(vid:bitstring, vsk:skey, vcert:certype, capk:pkey) =
 	
 
 		
-let CARegister(gmsk:gmskey, cask: skey, capk:pkey) = 
+let RSU_Register(gmsk:gmskey, cask: skey, capk:pkey) = 
 	in(ch, encsignreq:bitstring);
 	(* Decrypt the request *)
 	let (req:bitstring, signreq:bitstring, vcert:certype) = adec(encsignreq, cask) in
@@ -240,7 +240,7 @@ let CARegister(gmsk:gmskey, cask: skey, capk:pkey) =
 	out(ch, encsignresp).
 	
 	
-let CARevoke(gmsk:gmskey, cask: skey, capk:pkey) = 
+let RSU_Revoke(gmsk:gmskey, cask: skey, capk:pkey) = 
 	(* CA receives a revocation request *)
 	in(ch, encrevreq:bitstring);
 	(* Decrypt the report *)
@@ -273,7 +273,7 @@ let CARevoke(gmsk:gmskey, cask: skey, capk:pkey) =
 	new updatedgmsk:gmskey;
 	(* Start new phase: not revoked vehicles have to ask for a new key *)
 	phase 2;
-	!CARegister(updatedgmsk, cask, capk).
+	!RSU_Register(updatedgmsk, cask, capk).
 
 
 process 
@@ -301,8 +301,8 @@ process
 		event AttackerGetsEnrollmentCertificate(attvid, attpk);
 		out(ch, (attvid, attsk, attcert))
 	)	
-	| !CARegister(gmsk, cask, capk)
-	| !CARevoke(gmsk, cask, capk)
-	 | CASecretKeyReveal(cask)
-(*	| CAGroupMasterSecretKeyReveal(gmsk) *)
+	| !RSU_Register(gmsk, cask, capk)
+	| !RSU_Revoke(gmsk, cask, capk)
+	| CASecretKeyReveal(cask)
+(*	| GroupMasterSecretKeyReveal(gmsk) *)
 

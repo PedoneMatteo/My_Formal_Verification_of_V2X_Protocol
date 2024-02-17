@@ -1,10 +1,9 @@
 (*
-time proverif group_signatures_phases_strong_secrecy.pv
-real 6m20,416s
-user 6m20,061s
+time proverif group_signatures_phases.pv
+real 2m5,454s
+user 2m5,095s
 sys 0m0,328s
 *)
-
 
 
 free ch:channel. 	(* Public channel *)
@@ -21,9 +20,7 @@ const revoke_request:bitstring.
 const groupkey_request:bitstring.
 const groupkey_response:bitstring.
 
-free vid:bitstring [private].
-free encsignreq: bitstring [private].
-free encsignresp: bitstring [private].
+free vid:bitstring [private].	(* the secret *)
 
 (* Asymmetric signature *)
 fun pk(skey):pkey.
@@ -55,6 +52,7 @@ fun pseudocert(pkey, gskey):certype.
 reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; checkpseudocert(pseudocert(pseudopk, gsk(vid, gmsk)), gpk(gmsk)) = gok().
 reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; getpseudopk(pseudocert(pseudopk, gsk(vid, gmsk))) = pseudopk.
 reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; gopen(pseudocert(pseudopk, gsk(vid, gmsk)), gmsk) = vid.
+reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; getvid(pseudocert(pseudopk, gsk(vid, gmsk))) = vid [private].
 
 
 (* Revoked certificates table *)
@@ -68,10 +66,11 @@ event ValidGroupKeyRequestReceived(skey, bitstring).
 event ValidGroupKeyRequestSent(bitstring).
 event RevokedCannotGetGroupKey(bitstring).
 event ValidMessageSent(bitstring, certype, bitstring).
+event PseudoCertCreated(bitstring, skey).
 
 event ValidMessageReceived(bitstring, bitstring).
 event AttackerGetsEnrollmentCertificate(bitstring, pkey).
-event RevocationAsked(bitstring, certype).
+event RevocationAsked(bitstring, certype, certype).
 event ValidRevocationReportReceived(certype, certype).
 event RevokedVid(bitstring).
 event AlreadyRevoked(bitstring).
@@ -80,12 +79,9 @@ event CASKReveal(skey).
 event CAGMSKReveal(gmskey).
 
 
-(* QUERIES - Offline guessing attacks
-	NOTE: there is one single vehicle but the result is the same also with more vehicles*)
-weaksecret vid.
-weaksecret encsignreq.
-weaksecret encsignresp.
 
+(* Q1.6 - Sanity check: not event AlreadyRevoked - result: FALSE *)
+query vid:bitstring; event(AlreadyRevoked(vid)).
 
 let CASecretKeyReveal(cask:skey) = 
 	event CASKReveal(cask);
@@ -101,6 +97,7 @@ let VehicleSendMessages(vid:bitstring, vgsk:gskey) =
 	new vpseudosk:skey;
 	let vpseudopk = pk(vpseudosk) in
 	let vpseudocert = pseudocert(vpseudopk, vgsk) in
+	event PseudoCertCreated(vid, vpseudosk);
 	
 	(* Vehicle can send multiple messages with the same pseudocert *)
 	!(	(* Broadcast message to send *)
@@ -121,7 +118,8 @@ let VehicleReceiveMessage(vid:bitstring, vgpk:gpkey) =
 	if checksign(signm, m, vpseudopk) = ok() then
 	
 	(* Correct message *)
-	event ValidMessageReceived(vid, m).
+	event ValidMessageReceived(vid, m);
+	event ValidMessageReceivedSenderVid(getvid(vpseudocert)).
 
 
 let VehicleReport(vid:bitstring, vsk:skey, vcert:certype, capk:pkey, vgpk:gpkey) = 
@@ -139,7 +137,7 @@ let VehicleReport(vid:bitstring, vsk:skey, vcert:certype, capk:pkey, vgpk:gpkey)
 	let signreport = sign(report, vsk) in
 	let encrevreq = aenc((report, signreport, vcert), capk) in
 
-	event RevocationAsked(vid, vpseudocert);
+	event RevocationAsked(vid, vcert, vpseudocert);
 	out(ch, encrevreq).
 	
 
@@ -208,7 +206,7 @@ let RSU_Revoke(gmsk:gmskey, cask: skey, capk:pkey) =
 	let vpk = getpk(vcert) in
 	let vid = getid(vcert) in
 	(* Check if the enrollment certificate is revoked *)
-	get revokedcerts(=vid) in 0 else		(* TODO controllare se corretto *)
+	get revokedcerts(=vid) in 0 else
 	(* Check signature on request *)
 	if checksign(signreport, report, vpk) = ok() then
 	let (torevokecert:certype, =revoke_request) = report in
@@ -224,8 +222,7 @@ let RSU_Revoke(gmsk:gmskey, cask: skey, capk:pkey) =
 	
 	event RevokedVid(torevokevid);
 	insert revokedcerts(torevokevid);
-
-	(* TODO INIZIALIZZO PROCESSO PER AGGIORNAMENTO CHIAVE DI GRUPPO *)
+	
 	phase 1;
 	(* Update group master secret key *)
 	new updatedgmsk:gmskey;
@@ -234,17 +231,17 @@ let RSU_Revoke(gmsk:gmskey, cask: skey, capk:pkey) =
 	!RSU_Register(updatedgmsk, cask, capk).
 
 
-
 process 
 	(* Create CA group master secret key, public key and private key*)
 	new gmsk:gmskey; new cask:skey; 
 	let capk = pk(cask) in
 	out(ch, capk);
-	(* Create one single vehicle *)
-	(	(* Enrollment certificate *)
+	(* Create vehicles *)
+	!(	(* Enrollment certificate *)
+		new vid:bitstring; 
 		new vsk:skey; 
 		let vpk = pk(vsk) in
-		let vcert = cert(vid, vpk, cask) in
+		let vcert = cert(vid, vpk, cask) in	
 		( VehicleRegistration(vid, vsk, vcert, capk) | 
 		  phase 2;
 		  VehicleRegistration(vid, vsk, vcert, capk)
@@ -261,4 +258,6 @@ process
 	)	
 	| !RSU_Register(gmsk, cask, capk)
 	| !RSU_Revoke(gmsk, cask, capk)
+	| CASecretKeyReveal(cask)
+(*	| GroupMasterSecretKeyReveal(gmsk) *)
 
