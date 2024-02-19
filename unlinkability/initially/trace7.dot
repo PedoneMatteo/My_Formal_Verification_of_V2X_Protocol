@@ -1,0 +1,180 @@
+digraph {
+graph [ordering = out]
+edge [arrowhead = none, penwidth = 1.6, fontsize = 30]
+node [shape = point, width = 0, height = 0, fontsize = 30]
+Trace<br/>
+[label = <A trace has been found.<br/>
+>, shape = plaintext]
+P0__0 [label = "Honest Process", shape = plaintext]
+P__0 [label = "Attacker", shape = plaintext]
+Trace -> P0__0 [label = "", style = invisible, weight = 100]{rank = same; P0__0 P__0}
+P0__0 -> P0__1 [label = <>, weight = 100]
+P0__1 -> P0__2 [label = <>, weight = 100]
+P0__2 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{1}</FONT><FONT COLOR="blue">new </FONT>gmsk_16</TD></TR><TR><TD><FONT COLOR="darkgreen">{2}</FONT><FONT COLOR="blue">new </FONT>cask_16</TD></TR><TR><TD><FONT COLOR="darkgreen">{3}</FONT><FONT COLOR="blue">new </FONT>gmsk_17</TD></TR><TR><TD><FONT COLOR="darkgreen">{4}</FONT><FONT COLOR="blue">new </FONT>cask_17</TD></TR></TABLE>>]
+P0__2 -> P0__3 [label = <>, weight = 100]
+P0__3 -> P0__4 [label = <>, weight = 100]
+P__0 -> P__1 [label = <>, weight = 100]
+{rank = same; P__1 P0__4}
+P0__4 -> P0__5 [label = <>, weight = 100]
+P__1 -> P__2 [label = <>, weight = 100]
+{rank = same; P__2 P0__5}
+P0__5 -> P__2 [label = <~M = pk(<FONT COLOR="blue">choice</FONT>[cask_16,cask_17])>, arrowhead = normal]
+P0__5 -> P0__6 [label = <>, weight = 100]
+P__2 -> P__3 [label = <>, weight = 100]
+{rank = same; P__3 P0__6}
+P0__6 [label = "!", shape = ellipse]
+{rank = same; P0_1__6 P0_0__6}
+P0_1__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0__6 -> P0_1__6 [label = <>]
+P0_0__6 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0__6 -> P0_0__6 [label = <>]
+P0_0__6 -> P0_0__7 [label = <>, weight = 100]
+P0_0__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{10}</FONT><FONT COLOR="blue">new </FONT>vid_66</TD></TR><TR><TD><FONT COLOR="darkgreen">{11}</FONT><FONT COLOR="blue">new </FONT>vsk_18</TD></TR><TR><TD><FONT COLOR="darkgreen">{12}</FONT><FONT COLOR="blue">new </FONT>vid_67</TD></TR><TR><TD><FONT COLOR="darkgreen">{13}</FONT><FONT COLOR="blue">new </FONT>vsk_19</TD></TR></TABLE>>]
+P0_0__7 -> P0_0__8 [label = <>, weight = 100]
+/*RPar */
+P0_0__8 -> P0_0_1__8 [label = <>]
+P0_0__8 -> P0_0_0__8 [label = <>]
+P0_0__8 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0_0__8 P0_0_1__8}
+P0_0_0__8 [label = "!", shape = ellipse]
+P0_0_0_0__8 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_0_0__8 -> P0_0_0_0__8 [label = <>, weight = 100]
+/*RPar */
+P0_0_0_0__8 -> P0_0_0_0_1__8 [label = <>]
+P0_0_0_0__8 -> P0_0_0_0_0__8 [label = <>]
+P0_0_0_0__8 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0_0_0_0__8 P0_0_0_0_1__8}
+P0_0_0_0_0__8 [label = "!", shape = ellipse]
+P0_0_1__8 -> P0_0_1__9 [label = <>, weight = 100]
+P0_0_0_0_1__8 -> P0_0_0_0_1__9 [label = <>, weight = 100]
+P0_0_0_0_0__9 [label = "", style = invisible]
+P0_0_0_0_0__8 -> P0_0_0_0_0__9 [label = <>, weight = 100, style = invisible]
+P__3 -> P__4 [label = <>, weight = 100]
+{rank = same; P__4 P0_0_0_0_0__9 P0_0_0_0_1__9 P0_0_1__9}
+P0_0_1__9 -> P0_0_1__10 [label = <>, weight = 100]
+P__4 -> P__5 [label = <>, weight = 100]
+{rank = same; P__5 P0_0_1__10}
+P0_0_1__10 -> P__5 [label = <~M_1 = <FONT COLOR="blue">choice</FONT>[cert(vid_67,pk(vsk_19),cask_16),<br/>
+cert(vid_66,pk(vsk_18),cask_17)]>, arrowhead = normal]
+P0_0_1__10 -> P0_0_1__11 [label = <>, weight = 100]
+P0_0_0_0_1__9 -> P0_0_0_0_1__10 [label = <>, weight = 100]
+P0_0_0_0_0__10 [label = "", style = invisible]
+P0_0_0_0_0__9 -> P0_0_0_0_0__10 [label = <>, weight = 100, style = invisible]
+P__5 -> P__6 [label = <>, weight = 100]
+{rank = same; P__6 P0_0_0_0_0__10 P0_0_0_0_1__10 P0_0_1__11}
+P0_0_1__11 -> P0_0_1__12 [label = <>, weight = 100]
+P0_0_1__12 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{19}</FONT><FONT COLOR="blue">event</FONT> ValidGroupKeyRequestSent(<FONT COLOR="blue">choice</FONT>[vid_67,<br/>
+vid_66])</TD></TR></TABLE>>]
+P0_0_1__12 -> P0_0_1__13 [label = <>, weight = 100]
+P0_0_1__13 -> P0_0_1__14 [label = <>, weight = 100]
+P0_0_0_0_1__10 -> P0_0_0_0_1__11 [label = <>, weight = 100]
+P0_0_0_0_0__11 [label = "", style = invisible]
+P0_0_0_0_0__10 -> P0_0_0_0_0__11 [label = <>, weight = 100, style = invisible]
+P__6 -> P__7 [label = <>, weight = 100]
+{rank = same; P__7 P0_0_0_0_0__11 P0_0_0_0_1__11 P0_0_1__14}
+P0_0_1__14 -> P0_0_1__15 [label = <>, weight = 100]
+P__7 -> P__8 [label = <>, weight = 100]
+{rank = same; P__8 P0_0_1__15}
+P0_0_1__15 -> P__8 [label = <~M_2>, arrowhead = normal]
+P0_0_1__15 -> P0_0_1__16 [label = <>, weight = 100]
+P0_0_0_0_1__11 -> P0_0_0_0_1__12 [label = <>, weight = 100]
+P0_0_0_0_0__12 [label = "", style = invisible]
+P0_0_0_0_0__11 -> P0_0_0_0_0__12 [label = <>, weight = 100, style = invisible]
+P__8 -> P__9 [label = <>, weight = 100]
+{rank = same; P__9 P0_0_0_0_0__12 P0_0_0_0_1__12 P0_0_1__16}
+P0_1__6 -> P0_1__7 [label = <>, weight = 100]
+P0_1__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{10}</FONT><FONT COLOR="blue">new </FONT>vid_68</TD></TR><TR><TD><FONT COLOR="darkgreen">{11}</FONT><FONT COLOR="blue">new </FONT>vsk_20</TD></TR><TR><TD><FONT COLOR="darkgreen">{12}</FONT><FONT COLOR="blue">new </FONT>vid_69</TD></TR><TR><TD><FONT COLOR="darkgreen">{13}</FONT><FONT COLOR="blue">new </FONT>vsk_21</TD></TR></TABLE>>]
+P0_1__7 -> P0_1__8 [label = <>, weight = 100]
+/*RPar */
+P0_1__8 -> P0_1_1__8 [label = <>]
+P0_1__8 -> P0_1_0__8 [label = <>]
+P0_1__8 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_1_0__8 P0_1_1__8}
+P0_1_0__8 [label = "!", shape = ellipse]
+P0_1_1__8 -> P0_1_1__9 [label = <>, weight = 100]
+P0_1_0__9 [label = "", style = invisible]
+P0_1_0__8 -> P0_1_0__9 [label = <>, weight = 100, style = invisible]
+P0_0_1__16 -> P0_0_1__17 [label = <>, weight = 100]
+P0_0_0_0_1__12 -> P0_0_0_0_1__13 [label = <>, weight = 100]
+P0_0_0_0_0__13 [label = "", style = invisible]
+P0_0_0_0_0__12 -> P0_0_0_0_0__13 [label = <>, weight = 100, style = invisible]
+P__9 -> P__10 [label = <>, weight = 100]
+{rank = same; P__10 P0_0_0_0_0__13 P0_0_0_0_1__13 P0_0_1__17 P0_1_0__9 P0_1_1__9}
+P0_1_1__9 -> P0_1_1__10 [label = <>, weight = 100]
+P__10 -> P__11 [label = <>, weight = 100]
+{rank = same; P__11 P0_1_1__10}
+P0_1_1__10 -> P__11 [label = <~M_3 = <FONT COLOR="blue">choice</FONT>[cert(vid_69,pk(vsk_21),cask_16),<br/>
+cert(vid_68,pk(vsk_20),cask_17)]>, arrowhead = normal]
+P0_1_1__10 -> P0_1_1__11 [label = <>, weight = 100]
+P0_1_0__10 [label = "", style = invisible]
+P0_1_0__9 -> P0_1_0__10 [label = <>, weight = 100, style = invisible]
+P0_0_1__17 -> P0_0_1__18 [label = <>, weight = 100]
+P0_0_0_0_1__13 -> P0_0_0_0_1__14 [label = <>, weight = 100]
+P0_0_0_0_0__14 [label = "", style = invisible]
+P0_0_0_0_0__13 -> P0_0_0_0_0__14 [label = <>, weight = 100, style = invisible]
+P__11 -> P__12 [label = <>, weight = 100]
+{rank = same; P__12 P0_0_0_0_0__14 P0_0_0_0_1__14 P0_0_1__18 P0_1_0__10 P0_1_1__11}
+P0_1_1__11 -> P0_1_1__12 [label = <>, weight = 100]
+P0_1_1__12 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{19}</FONT><FONT COLOR="blue">event</FONT> ValidGroupKeyRequestSent(<FONT COLOR="blue">choice</FONT>[vid_69,<br/>
+vid_68])</TD></TR></TABLE>>]
+P0_1_1__12 -> P0_1_1__13 [label = <>, weight = 100]
+P0_1_1__13 -> P0_1_1__14 [label = <>, weight = 100]
+P0_1_0__11 [label = "", style = invisible]
+P0_1_0__10 -> P0_1_0__11 [label = <>, weight = 100, style = invisible]
+P0_0_1__18 -> P0_0_1__19 [label = <>, weight = 100]
+P0_0_0_0_1__14 -> P0_0_0_0_1__15 [label = <>, weight = 100]
+P0_0_0_0_0__15 [label = "", style = invisible]
+P0_0_0_0_0__14 -> P0_0_0_0_0__15 [label = <>, weight = 100, style = invisible]
+P__12 -> P__13 [label = <>, weight = 100]
+{rank = same; P__13 P0_0_0_0_0__15 P0_0_0_0_1__15 P0_0_1__19 P0_1_0__11 P0_1_1__14}
+P0_1_1__14 -> P0_1_1__15 [label = <>, weight = 100]
+P__13 -> P__14 [label = <>, weight = 100]
+{rank = same; P__14 P0_1_1__15}
+P0_1_1__15 -> P__14 [label = <~M_4>, arrowhead = normal]
+P0_1_1__15 -> P0_1_1__16 [label = <>, weight = 100]
+P0_1_0__12 [label = "", style = invisible]
+P0_1_0__11 -> P0_1_0__12 [label = <>, weight = 100, style = invisible]
+P0_0_1__19 -> P0_0_1__20 [label = <>, weight = 100]
+P0_0_0_0_1__15 -> P0_0_0_0_1__16 [label = <>, weight = 100]
+P0_0_0_0_0__16 [label = "", style = invisible]
+P0_0_0_0_0__15 -> P0_0_0_0_0__16 [label = <>, weight = 100, style = invisible]
+P__14 -> P__15 [label = <>, weight = 100]
+{rank = same; P__15 P0_0_0_0_0__16 P0_0_0_0_1__16 P0_0_1__20 P0_1_0__12 P0_1_1__16}
+P0_0_0_0_1__16 -> P0_0_0_0_1__17 [label = <>, weight = 100]
+P0_0_0_0_0__17 [label = "", style = invisible]
+P0_0_0_0_0__16 -> P0_0_0_0_0__17 [label = <>, weight = 100, style = invisible]
+P__15 -> P__16 [label = <>, weight = 100]
+{rank = same; P__16 P0_0_0_0_0__17 P0_0_0_0_1__17}
+P0_0_0_0_1__17 -> P0_0_0_0_1__18 [label = <>, weight = 100]
+P__16 -> P__17 [label = <>, weight = 100]
+{rank = same; P__17 P0_0_0_0_1__18}
+P0_0_0_0_1__18 -> P__17 [label = <~M_4>, dir = back, arrowhead = normal]
+P0_0_0_0_1__18 -> P0_0_0_0_1__19 [label = <>, weight = 100]
+P0_0_0_0_0__18 [label = "", style = invisible]
+P0_0_0_0_0__17 -> P0_0_0_0_0__18 [label = <>, weight = 100, style = invisible]
+P__17 -> P__18 [label = <>, weight = 100]
+{rank = same; P__18 P0_0_0_0_0__18 P0_0_0_0_1__19}
+P0_0_0_0_1__19 -> P0_0_0_0_1__20 [label = <>, weight = 100]
+P0_0_0_0_1__20 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{304}</FONT><FONT COLOR="blue">get</FONT> v_1164: table <FONT COLOR="blue">suchthat</FONT> (<FONT COLOR="blue">if</FONT> <FONT COLOR="blue">choice</FONT>[true,<br/>
+false] <FONT COLOR="blue">then</FONT> (success?(1-proj-revokedcerts(v_1164))<br/>
+&amp;&amp; (<FONT COLOR="blue">choice</FONT>[vid_69,caught-fail] =nf 1-proj-revokedcerts(<br/>
+v_1164))) <FONT COLOR="blue">else</FONT> (success?(1-proj-revokedcerts(v_1164))<br/>
+&amp;&amp; (<FONT COLOR="blue">choice</FONT>[caught-fail,vid_68] =nf 1-proj-revokedcerts(<br/>
+v_1164)))): else branch taken</TD></TR></TABLE>>]
+P0_0_0_0_1__20 -> P0_0_0_0_1__21 [label = <>, weight = 100]
+P__18 -> P__19 [label = <>, weight = 100]
+{rank = same; P__19 P0_0_0_0_1__20}
+P0_0_0_0_1__21 -> P0_0_0_0_1__22 [label = <>, weight = 100]
+P0_0_0_0_1__22 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{262}</FONT><FONT COLOR="blue">if</FONT> (<FONT COLOR="blue">if</FONT> <FONT COLOR="blue">choice</FONT>[true,false] <FONT COLOR="blue">then</FONT> not(<FONT COLOR="blue">choice</FONT>[<br/>
+true,false]) <FONT COLOR="blue">else</FONT> not((<FONT COLOR="blue">choice</FONT>[false,true] &amp;&amp;<br/>
+<FONT COLOR="blue">choice</FONT>[caught-fail,false])))<br/>
+This process performs a test that may succeed on<br/>
+one side and not on the other.</TD></TR></TABLE>>]
+P0_0_0_0_1__22 -> P0_0_0_0_1__23 [label = <>, weight = 100]
+Abbrev [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR> <TD> Abbreviations </TD></TR><TR><TD>~M_2 = <FONT COLOR="blue">choice</FONT>[aenc((groupkey_request,sign(groupkey_request,<br/>
+vsk_19),cert(vid_67,pk(vsk_19),cask_16)),pk(cask_16)),<br/>
+aenc((groupkey_request,sign(groupkey_request,vsk_18),<br/>
+cert(vid_66,pk(vsk_18),cask_17)),pk(cask_17))]</TD></TR><TR><TD>~M_4 = <FONT COLOR="blue">choice</FONT>[aenc((groupkey_request,sign(groupkey_request,<br/>
+vsk_21),cert(vid_69,pk(vsk_21),cask_16)),pk(cask_16)),<br/>
+aenc((groupkey_request,sign(groupkey_request,vsk_20),<br/>
+cert(vid_68,pk(vsk_20),cask_17)),pk(cask_17))]</TD></TR></TABLE>>]Abbrev -> P__0 [style = invisible, weight =100]}

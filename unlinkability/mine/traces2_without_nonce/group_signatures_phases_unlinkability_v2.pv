@@ -1,0 +1,403 @@
+(*
+time proverif group_signatures_phases_unlinkability.pv
+real 24m27,763s
+user 24m27,641s
+sys 0m0,040s
+*)
+
+
+free ch:channel. 	(* Public channel *)
+
+type pkey.
+type skey.
+type result.
+type gmskey.
+type gskey.
+type gpkey.
+type certype.
+
+const revoke_request:bitstring.
+const groupkey_request:bitstring.
+const groupkey_response:bitstring.
+
+(* Asymmetric signature *)
+fun pk(skey):pkey.
+fun sign(bitstring, skey):bitstring.
+fun ok():result.
+reduc forall m:bitstring, sk:skey; checksign(sign(m, sk), m, pk(sk)) = ok().
+
+(* Asymmetric encryption *)
+fun aenc(bitstring, pkey):bitstring.
+reduc forall m:bitstring, sk:skey; adec(aenc(m, pk(sk)), sk) = m.
+
+(* Certificate *)
+fun cert(bitstring, pkey, skey):certype [private].
+reduc forall vid:bitstring, vpk:pkey, sk:skey; checkcert(cert(vid, vpk, sk), pk(sk)) = ok().
+reduc forall vid:bitstring, vpk:pkey, sk:skey; getpk(cert(vid, vpk, sk)) = vpk.
+reduc forall vid:bitstring, vpk:pkey, sk:skey; getid(cert(vid, vpk, sk)) = vid [private].
+
+(* Group signature *)
+					(* Group master secret key: gmsk *)
+fun gpk(gmskey):gpkey.			(* Group public key: gpk(gmsk) *)
+fun gsk(bitstring, gmskey):gskey.	(* Vehicle private group secret key: gsk(vid, gmsk) *)
+fun gsign(bitstring, gskey):bitstring.	(* gsign(m, gsk) *)
+fun gok():result.
+(* reduc forall m:bitstring, vid:bitstring, gmsk:gmskey; gchecksign(gsign(m, gsk(vid, gmsk)), m, gpk(gmsk)) = gok().
+   reduc forall m:bitstring, vid:bitstring, gmsk:gmskey; gopen(gsign(m, gsk(vid, gmsk)), gmsk) = vid.	*)
+
+(* Pseudonym certificate *)
+fun pseudocert(pkey, gskey):certype.
+reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; checkpseudocert(pseudocert(pseudopk, gsk(vid, gmsk)), gpk(gmsk)) = gok().
+reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; getpseudopk(pseudocert(pseudopk, gsk(vid, gmsk))) = pseudopk.
+reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; gopen(pseudocert(pseudopk, gsk(vid, gmsk)), gmsk) = vid.
+reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; getvid(pseudocert(pseudopk, gsk(vid, gmsk))) = vid [private].
+
+
+(* Revoked certificates table *)
+table revokedcerts(bitstring).		(* vid of the revoked vehicle *)
+
+
+(* Events *)
+event ValidGroupPrivateKeyReceived(bitstring, gskey, gpkey).
+event ValidGroupPrivateKeySent(bitstring, gskey, gpkey).
+event ValidGroupKeyRequestReceived(skey, bitstring).
+event ValidGroupKeyRequestSent(bitstring).
+event RevokedCannotGetGroupKey(bitstring).
+event ValidMessageSent(bitstring, bitstring).
+
+event ValidMessageReceived(bitstring, bitstring).
+event AttackerGetsEnrollmentCertificate(bitstring, pkey).
+event RevocationAsked(bitstring, certype).
+event ValidRevocationReportReceived(certype, certype).
+event RevokedVid(bitstring).
+event ValidMessageReceivedSenderVid(bitstring).
+event CASKReveal(skey).
+event CAGMSKReveal(gmskey).
+
+event WaitingRequest().
+event GroupKeyRequestReceived(bitstring).
+
+(* Q6 - Unlinkability: a message cannot be linked to a given vehicle: check whether a protocol is equal to a version
+        of itself in which the number of the message he can send is limited to one 
+        !(gsk, !P) ≈ !(gsk, P) *)
+
+
+equivalence 
+( (* Multiple sessions *)
+
+	(* Create CA group master secret key, public key and private key*)
+	new gmsk:gmskey; new cask:skey; 
+	let capk = pk(cask) in
+	out(ch, capk);
+
+	(* FIRST VEHICLE *)
+	(	(* Enrollment certificate *)
+		new vid:bitstring; 
+		new vsk:skey; 
+		let vpk = pk(vsk) in
+		let vcert = cert(vid, vpk, cask) in
+		out(ch, vcert);
+		( 	(** VEHICLE REGISTRATION **)
+			(* Request group private and public key *)
+			let req = groupkey_request in
+			let signreq = sign(req, vsk) in
+			let encsignreq = aenc((req, signreq, vcert), capk) in
+	
+			event ValidGroupKeyRequestSent(vid); 
+			out(ch, encsignreq);
+			in(ch, encsignresp:bitstring);
+	
+			(* Decrypt the response *)
+			let (resp:bitstring, signature:bitstring) = adec(encsignresp, vsk) in
+			(* Check signature *)
+			if checksign(signature, resp, capk) = ok() then
+			(* Check vid in the response *)
+			let (=groupkey_response, rvid:bitstring, vgsk:gskey, vgpk:gpkey) = resp in
+			if rvid = vid then
+	
+			event ValidGroupPrivateKeyReceived(vid, vgsk, vgpk);
+			(
+			  !(	(* VEHICLE SEND MESSAGE *)
+			  	(* Create the pseudonym certificate *)
+				new vpseudosk:skey;
+				let vpseudopk = pk(vpseudosk) in
+				let vpseudocert = pseudocert(vpseudopk, vgsk) in
+				(* Broadcast message to send *)
+				new m:bitstring;
+				(* Sign the message *)
+				let signm = sign(m, vpseudosk) in
+				event ValidMessageSent(vid, m);
+				out(ch, (m, signm, vpseudocert))
+			  )
+			  | 
+			  !(	(* VEHICLE RECEIVE MESSAGE *)
+			  	in(ch, (m:bitstring, signm:bitstring, vpseudocert:certype));
+				(* Check pseudonym certificate*)
+				if checkpseudocert(vpseudocert, vgpk) = gok() then
+				(* Check message signature *)
+				let vpseudopk = getpseudopk(vpseudocert) in
+				if checksign(signm, m, vpseudopk) = ok() then
+	
+				(* Correct message *)
+				event ValidMessageReceived(vid, m);
+				event ValidMessageReceivedSenderVid(getvid(vpseudocert))
+			  )
+			)
+			
+		)
+	  )
+	| 
+	(* SECOND VEHICLE *)
+	(	(* Enrollment certificate *)
+		new vid:bitstring; 
+		new vsk:skey; 
+		let vpk = pk(vsk) in
+		let vcert = cert(vid, vpk, cask) in
+		out(ch, vcert);
+		( 	(** VEHICLE REGISTRATION **)
+			(* Request group private and public key *)
+			let req = groupkey_request in
+			let signreq = sign(req, vsk) in
+			let encsignreq = aenc((req, signreq, vcert), capk) in
+	
+			event ValidGroupKeyRequestSent(vid); 
+			out(ch, encsignreq);
+			in(ch, encsignresp:bitstring);
+	
+			(* Decrypt the response *)
+			let (resp:bitstring, signature:bitstring) = adec(encsignresp, vsk) in
+			(* Check signature *)
+			if checksign(signature, resp, capk) = ok() then
+			(* Check vid in the response *)
+			let (=groupkey_response, rvid:bitstring, vgsk:gskey, vgpk:gpkey) = resp in
+			if rvid = vid then
+	
+			event ValidGroupPrivateKeyReceived(vid, vgsk, vgpk);
+			(
+			  !(	(* VEHICLE SEND MESSAGE *)
+			  	(* Create the pseudonym certificate *)
+				new vpseudosk:skey;
+				let vpseudopk = pk(vpseudosk) in
+				let vpseudocert = pseudocert(vpseudopk, vgsk) in
+				(* Broadcast message to send *)
+				new m:bitstring;
+				(* Sign the message *)
+				let signm = sign(m, vpseudosk) in
+				event ValidMessageSent(vid, m);
+				out(ch, (m, signm, vpseudocert))
+			  )
+			  | 
+			  !(	(* VEHICLE RECEIVE MESSAGE *)
+			  	in(ch, (m:bitstring, signm:bitstring, vpseudocert:certype));
+				(* Check pseudonym certificate*)
+				if checkpseudocert(vpseudocert, vgpk) = gok() then
+				(* Check message signature *)
+				let vpseudopk = getpseudopk(vpseudocert) in
+				if checksign(signm, m, vpseudopk) = ok() then
+	
+				(* Correct message *)
+				event ValidMessageReceived(vid, m);
+				event ValidMessageReceivedSenderVid(getvid(vpseudocert))
+			  )
+			)
+			
+		)
+	  )
+	(* ONLY ONE Attacker can get enrollment certificates *)
+	|(	(* Attacker enrollment certificate *)
+		new attvid:bitstring;
+		new attsk:skey;
+		let attpk = pk(attsk) in
+		let attcert = cert(attvid, attpk, cask) in
+		event AttackerGetsEnrollmentCertificate(attvid, attpk);
+		out(ch, (attvid, attsk, attcert))
+	)	
+	| 
+	  !( 	
+		event WaitingRequest();
+		in(ch, encsignreq:bitstring);
+	  	event GroupKeyRequestReceived(encsignreq);
+		(* Decrypt the request *)
+		let (req:bitstring, signreq:bitstring, vcert:certype) = adec(encsignreq, cask) in
+	
+		if req = groupkey_request then
+		(* Check vehicle enrollment certificate *)
+		if checkcert(vcert, capk) = ok() then
+		let vpk = getpk(vcert) in
+		let vid = getid(vcert) in
+		(* Check signature on request *)
+		if checksign(signreq, req, vpk) = ok() then
+
+		event ValidGroupKeyRequestReceived(cask, vid);
+	
+		(* Create new group private secret key *)
+		let vgsk = gsk(vid, gmsk) in
+		let resp = (groupkey_response, vid, vgsk, gpk(gmsk)) in
+		let signresp = sign(resp, cask) in
+		let encsignresp = aenc((resp, signresp), vpk) in
+	
+		event ValidGroupPrivateKeySent(vid, vgsk, gpk(gmsk));
+		out(ch, encsignresp)
+	   	)
+	
+)
+	
+
+( (* Single session *)
+
+	(* Create CA group master secret key, public key and private key*)
+	new gmsk:gmskey; new cask:skey; 
+	let capk = pk(cask) in
+	out(ch, capk);
+	(* FIRST VEHICLE *)
+	(	(* Enrollment certificate *)
+		new vid:bitstring; 
+		new vsk:skey; 
+		let vpk = pk(vsk) in
+		let vcert = cert(vid, vpk, cask) in
+		out(ch, vcert);
+		( 	(** VEHICLE REGISTRATION **)
+			(* Request group private and public key *)
+			let req = groupkey_request in
+			let signreq = sign(req, vsk) in
+			let encsignreq = aenc((req, signreq, vcert), capk) in
+	
+			event ValidGroupKeyRequestSent(vid); 
+			out(ch, encsignreq);
+			in(ch, encsignresp:bitstring);
+	
+			(* Decrypt the response *)
+			let (resp:bitstring, signature:bitstring) = adec(encsignresp, vsk) in
+			(* Check signature *)
+			if checksign(signature, resp, capk) = ok() then
+			(* Check vid in the response *)
+			let (=groupkey_response, rvid:bitstring, vgsk:gskey, vgpk:gpkey) = resp in
+			if rvid = vid then
+	
+			event ValidGroupPrivateKeyReceived(vid, vgsk, vgpk);
+			(
+			  (	(* VEHICLE SEND MESSAGE *)
+			  	(* Create the pseudonym certificate *)
+				new vpseudosk:skey;
+				let vpseudopk = pk(vpseudosk) in
+				let vpseudocert = pseudocert(vpseudopk, vgsk) in
+				(* Broadcast message to send *)
+				new m:bitstring;
+				(* Sign the message *)
+				let signm = sign(m, vpseudosk) in
+				event ValidMessageSent(vid, m);
+				out(ch, (m, signm, vpseudocert))
+			  )
+			  | 
+			  !(	(* VEHICLE RECEIVE MESSAGE *)
+			  	in(ch, (m:bitstring, signm:bitstring, vpseudocert:certype));
+				(* Check pseudonym certificate*)
+				if checkpseudocert(vpseudocert, vgpk) = gok() then
+				(* Check message signature *)
+				let vpseudopk = getpseudopk(vpseudocert) in
+				if checksign(signm, m, vpseudopk) = ok() then
+	
+				(* Correct message *)
+				event ValidMessageReceived(vid, m);
+				event ValidMessageReceivedSenderVid(getvid(vpseudocert))
+			  )	
+			)
+		
+		)
+	  )
+	|
+	(* SECOND VEHICLE *)
+	(	(* Enrollment certificate *)
+		new vid:bitstring; 
+		new vsk:skey; 
+		let vpk = pk(vsk) in
+		let vcert = cert(vid, vpk, cask) in
+		out(ch, vcert);
+		( 	(** VEHICLE REGISTRATION **)
+			(* Request group private and public key *)
+			let req = groupkey_request in
+			let signreq = sign(req, vsk) in
+			let encsignreq = aenc((req, signreq, vcert), capk) in
+	
+			event ValidGroupKeyRequestSent(vid); 
+			out(ch, encsignreq);
+			in(ch, encsignresp:bitstring);
+	
+			(* Decrypt the response *)
+			let (resp:bitstring, signature:bitstring) = adec(encsignresp, vsk) in
+			(* Check signature *)
+			if checksign(signature, resp, capk) = ok() then
+			(* Check vid in the response *)
+			let (=groupkey_response, rvid:bitstring, vgsk:gskey, vgpk:gpkey) = resp in
+			if rvid = vid then
+	
+			event ValidGroupPrivateKeyReceived(vid, vgsk, vgpk);
+			(
+			  (	(* VEHICLE SEND MESSAGE *)
+			  	(* Create the pseudonym certificate *)
+				new vpseudosk:skey;
+				let vpseudopk = pk(vpseudosk) in
+				let vpseudocert = pseudocert(vpseudopk, vgsk) in
+				(* Broadcast message to send *)
+				new m:bitstring;
+				(* Sign the message *)
+				let signm = sign(m, vpseudosk) in
+				event ValidMessageSent(vid, m);
+				out(ch, (m, signm, vpseudocert))
+			  )
+			  | 
+			  !(	(* VEHICLE RECEIVE MESSAGE *)
+			  	in(ch, (m:bitstring, signm:bitstring, vpseudocert:certype));
+				(* Check pseudonym certificate*)
+				if checkpseudocert(vpseudocert, vgpk) = gok() then
+				(* Check message signature *)
+				let vpseudopk = getpseudopk(vpseudocert) in
+				if checksign(signm, m, vpseudopk) = ok() then
+	
+				(* Correct message *)
+				event ValidMessageReceived(vid, m);
+				event ValidMessageReceivedSenderVid(getvid(vpseudocert))
+			  )	
+			)
+		)
+	  )
+	(* ONLY ONE Attacker can get enrollment certificates *)
+	|(	(* Attacker enrollment certificate *)
+		new attvid:bitstring;
+		new attsk:skey;
+		let attpk = pk(attsk) in
+		let attcert = cert(attvid, attpk, cask) in
+		event AttackerGetsEnrollmentCertificate(attvid, attpk);
+		out(ch, (attvid, attsk, attcert))
+	)	
+	| 
+	  !( 	
+		event WaitingRequest();
+		in(ch, encsignreq:bitstring);
+		event GroupKeyRequestReceived(encsignreq);
+		(* Decrypt the request *)
+		let (req:bitstring, signreq:bitstring, vcert:certype) = adec(encsignreq, cask) in
+	
+		if req = groupkey_request then
+		(* Check vehicle enrollment certificate *)
+		if checkcert(vcert, capk) = ok() then
+		let vpk = getpk(vcert) in
+		let vid = getid(vcert) in
+		(* Check signature on request *)
+		if checksign(signreq, req, vpk) = ok() then
+
+		event ValidGroupKeyRequestReceived(cask, vid);
+	
+		(* Create new group private secret key *)
+		let vgsk = gsk(vid, gmsk) in
+		let resp = (groupkey_response, vid, vgsk, gpk(gmsk)) in
+		let signresp = sign(resp, cask) in
+		let encsignresp = aenc((resp, signresp), vpk) in
+	
+		event ValidGroupPrivateKeySent(vid, vgsk, gpk(gmsk));
+		out(ch, encsignresp)
+	   	)
+)
+
+
+
