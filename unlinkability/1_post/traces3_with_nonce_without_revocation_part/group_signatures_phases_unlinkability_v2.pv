@@ -56,7 +56,6 @@ reduc forall pseudopk:pkey, vid:bitstring, gmsk:gmskey; getvid(pseudocert(pseudo
 (* Revoked certificates table *)
 table revokedcerts(bitstring).		(* vid of the revoked vehicle *)
 
-
 (* Events *)
 event ValidGroupPrivateKeyReceived(bitstring, gskey, gpkey).
 event ValidGroupPrivateKeySent(bitstring, gskey, gpkey).
@@ -76,6 +75,7 @@ event CAGMSKReveal(gmskey).
 
 event WaitingRequest().
 event GroupKeyRequestReceived(bitstring).
+event ImHere().
 
 (* Q6 - Unlinkability: a message cannot be linked to a given vehicle: check whether a protocol is equal to a version
         of itself in which the number of the message he can send is limited to one 
@@ -106,7 +106,7 @@ equivalence
 			event ValidGroupKeyRequestSent(vid); 
 			out(ch, encsignreq);
 			in(ch, encsignresp:bitstring);
-	
+			event ImHere();
 			(* Decrypt the response *)
 			let (resp:bitstring, signature:bitstring) = adec(encsignresp, vsk) in
 			(* Check signature *)
@@ -165,7 +165,7 @@ equivalence
 			event ValidGroupKeyRequestSent(vid); 
 			out(ch, encsignreq);
 			in(ch, encsignresp:bitstring);
-	
+			event ImHere();
 			(* Decrypt the response *)
 			let (resp:bitstring, signature:bitstring) = adec(encsignresp, vsk) in
 			(* Check signature *)
@@ -269,7 +269,7 @@ equivalence
 			event ValidGroupKeyRequestSent(vid); 
 			out(ch, encsignreq);
 			in(ch, encsignresp:bitstring);
-	
+			event ImHere();
 			(* Decrypt the response *)
 			let (resp:bitstring, signature:bitstring) = adec(encsignresp, vsk) in
 			(* Check signature *)
@@ -328,7 +328,7 @@ equivalence
 			event ValidGroupKeyRequestSent(vid); 
 			out(ch, encsignreq);
 			in(ch, encsignresp:bitstring);
-	
+			event ImHere();
 			(* Decrypt the response *)
 			let (resp:bitstring, signature:bitstring) = adec(encsignresp, vsk) in
 			(* Check signature *)
