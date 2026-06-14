@@ -25,7 +25,7 @@ Install it on Ubuntu/Debian:
 sudo apt install proverif
 ```
 
-Or build from source at [https://github.com/blanchet/proverif](https://github.com/blanchet/proverif).
+Or build from source at [https://github.com/blanchet/proverif](https://bblanche.gitlabpages.inria.fr/proverif/).
 
 ## Structure
 
